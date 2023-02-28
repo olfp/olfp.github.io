@@ -1,0 +1,27 @@
+8 regs 16 bit
+
+PSW   R0
+R1    R2
+R3    R4
+R5    LR    
+      PC
+
+PSW: C, Z, N, V, I, AAA <- LWA dest
+PC: LSB is 0
+
+00 XXX XXX XXX XXX XXX 0    LWA Load word address into RA (selected by A bits in PSW, default 5)
+01 SX XXX XXX XXX RRR 01    ASI Add signed immediate to Register
+02 AAA OOO TTTT DDD 011     Shift Ops: op A, T times -> D, SHL, ASR, SLC, ARC, ROL, RLC, RAC
+03 AAA OOO BBB DDD 0111     Binary ALU Op: A op B -> D; AND, IOR, XOR, ADD, ADC, SUB, SBC
+04 AAA BBB XXX I D 01111    Transfer Register to Memory; inc/dec; D==0 A -> M[B+X], D=1 M[B+X] -> A; X+=(2*I-1) <-- !!! check pre/post
+05 AAA BBB XXX D 011111     Transfer Register to Memory; D==0 A -> M[B+X], D=1 M[B+X] -> A
+06 CCCC SOOOO 0111111       Branch relative conditional; PC += signed offset if condition met
+07 AAA OO DDD 01111111      Unary ALU Op: op A -> D; NOT, CMP, TBC, TBS
+08 MMMMM OO 011111111       Modify PSW flags SET, CLR by Mask, ?
+09 AAA OOO 0111111111       Byte Ops: A -> op A; HIB, LOB, SXT, ?
+10 
+11
+12 AAA 0111111111111        Set address register address in PSW
+13
+14
+15 1111111111111111         Halt
