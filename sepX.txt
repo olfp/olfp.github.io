@@ -1,4 +1,4 @@
-8 regs 16 bit, 16-bit word addresses, 8x64k banked address space
+8 regs 16 bit, 15-bit word addresses, 8x32k banked address space (words)
 
 PSW   R0(=0)
 R1    R2
@@ -13,12 +13,12 @@ PC: LSB is 0 -> Bank zero, Bank B from PSW else
 01 10 SX XXX XXX XXX 000     Branch and link relative: PC+1 -> LR, PC += #X
 01 10 SX XXX XXX XXX RRR     ASI Add signed immediate to Register, R != 0: R += #X
 02 110 BBBB BBBB X 000 0     Set active bank to B
-02 110 000 X D RRR X 000 1   Transfer PSW; D=0: PSW -> R; D=1 R -> PSW; OOO: Op Hi, Lo-Byte, ?
+02 110 OOO X D RRR X 000 1   Transfer PSW; D=0: PSW -> R; D=1 R -> PSW; OOO: Op Hi, Lo-Byte, ?
 02 110 AAA OOO BBB DDD I     Binary ALU Op: A op B -> D; I=1: A op #B -> D; AND, IOR, XOR, ADD, ADC, SUB, SBC
 03 1110 AAA OOO TTT DDD      Shift Ops: op A, T times -> D; SHL, ASR, SLC, ARC, ROL, RLC, RAC
-04 11110 000 BBB XXX I D     Transfer PSW to memory, from memory (push, pop, see below)
-04 11110 AAA BBB XXX I D     Transfer Register to Memory; post-inc/pre-dec; D==0: A -> M[B+X], X+=(2*I-1); D=1: X+=(2*I-1), M[B+X] -> A;  
-05 111110 AAA BBB XXX D      Transfer Register to Memory; D==0 A -> M[B+X], D=1 M[B+X] -> A
+04 11110 D I 000 BBB XXX     Transfer PSW to memory, from memory (push, pop, see below)
+04 11110 D I AAA BBB XXX     Transfer Register to Memory; post-inc/pre-dec; D==0: A -> M[B+X], X+=(2*I-1); D=1: X+=(2*I-1), M[B+X] -> A;  
+05 111110 D AAA BBB XXX      Transfer Register to Memory; D==0 A -> M[B+X], D=1 M[B+X] -> A
 06 1111110 CCCC SOOOO        Branch relative conditional; PC += #O (signed offset) if condition met
 07 11111110 AAA OO DDD       Unary ALU Op: op A -> D; NOT, CMP, TBC, TBS
 08 111111110 AAA BBB O       Byte Ops: op A -> B: LOW, SXT
