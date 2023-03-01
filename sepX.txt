@@ -11,7 +11,7 @@ PC: LSB is 0 -> Bank zero, Bank B from PSW else
 
 00 0 XXX XXX XXX XXX XXX     LWA Load word address into RA (selected by A bits in PSW, default 0 -> PC, JMP abs)
 01 10 SX XXX XXX XXX 000     Branch and link relative: PC+1 -> LR, PC += #X
-01 110 SX XXX XXX XXX RRR    ASI Add signed immediate to Register, R != 0: R += #X
+01 10 SX XXX XXX XXX RRR    ASI Add signed immediate to Register, R != 0: R += #X
 02 110 AAA OOO TTTT DDD      Shift Ops: op A, T times -> D, SHL, ASR, SLC, ARC, ROL, RLC, RAC
 03 1110 BBBB BBBB X 000      Set active bank to B
 03 1110 AAA OOO BBB DDD      Binary ALU Op: A op B -> D; AND, IOR, XOR, ADD, ADC, SUB, SBC
