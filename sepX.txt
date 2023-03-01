@@ -11,10 +11,11 @@ PC: LSB is 0 -> Bank zero, Bank B from PSW else
 
 00 0 XXX XXX XXX XXX XXX     LWA Load word address into RA (selected by A bits in PSW, default 0 -> PC, JMP abs)
 01 10 SX XXX XXX XXX 000     Branch and link relative: PC+1 -> LR, PC += #X
-01 10 SX XXX XXX XXX RRR    ASI Add signed immediate to Register, R != 0: R += #X
-02 110 AAA OOO TTTT DDD      Shift Ops: op A, T times -> D, SHL, ASR, SLC, ARC, ROL, RLC, RAC
-03 1110 BBBB BBBB X 000      Set active bank to B
-03 1110 AAA OOO BBB DDD      Binary ALU Op: A op B -> D; AND, IOR, XOR, ADD, ADC, SUB, SBC
+01 10 SX XXX XXX XXX RRR     ASI Add signed immediate to Register, R != 0: R += #X
+02 110 BBBB BBBB X 000 0     Set active bank to B
+02 110 000 X D RRR X 000 1   Transfer PSW; D=0: PSW -> R; D=1 R -> PSW; OOO: Op Hi, Lo-Byte, ?
+02 110 AAA OOO BBB DDD I     Binary ALU Op: A op B -> D; I=1: A op #B -> D; AND, IOR, XOR, ADD, ADC, SUB, SBC
+03 1110 AAA OOO TTT DDD      Shift Ops: op A, T times -> D; SHL, ASR, SLC, ARC, ROL, RLC, RAC
 04 11110 000 BBB XXX I D     Transfer PSW to memory, from memory (push, pop, see below)
 04 11110 AAA BBB XXX I D     Transfer Register to Memory; post-inc/pre-dec; D==0: A -> M[B+X], X+=(2*I-1); D=1: X+=(2*I-1), M[B+X] -> A;  
 05 111110 AAA BBB XXX D      Transfer Register to Memory; D==0 A -> M[B+X], D=1 M[B+X] -> A
@@ -27,8 +28,8 @@ PC: LSB is 0 -> Bank zero, Bank B from PSW else
 12 1111111111110 AAA         Set address register address in PSW: SAR
 13 11111111111110 XX
 14 111111111111110 X         Enable/Disable Interrupts X=1: ENI, X=0 DIS
-15 1111111111111110
-16 1111111111111111          Halt
+15 1111111111111110          Halt and catch fire, HCF
+16 1111111111111111          Halt, HLT
 
 Address extension: PSW holds 8-bit bank number, LSB of Address selects bank zero or active bank
 
