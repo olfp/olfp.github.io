@@ -9,24 +9,24 @@ R5    LR(R6)
 PSW: C, Z, N, V, I, AAA <- LWA dest, BBBBBBBB <- Bank number
 PC: LSB is 0 -> Bank zero, Bank B from PSW else
 
-00 0 XXX XXX XXX XXX XXX     LWA Load word address into RA (selected by A bits in PSW, default 5)
+00 0 XXX XXX XXX XXX XXX     LWA Load word address into RA (selected by A bits in PSW, default 0 -> PC, JMP abs)
 01 10 SX XXX XXX XXX 000     Branch and link relative: PC+1 -> LR, PC += #X
 01 110 SX XXX XXX XXX RRR    ASI Add signed immediate to Register, R != 0: R += #X
 02 110 AAA OOO TTTT DDD      Shift Ops: op A, T times -> D, SHL, ASR, SLC, ARC, ROL, RLC, RAC
 03 1110 BBBB BBBB X 000      Set active bank to B
 03 1110 AAA OOO BBB DDD      Binary ALU Op: A op B -> D; AND, IOR, XOR, ADD, ADC, SUB, SBC
-04 11110 000 BBB AAA I D     Transfer PSW to memory, from memory (push, pop, see below)
+04 11110 000 BBB XXX I D     Transfer PSW to memory, from memory (push, pop, see below)
 04 11110 AAA BBB XXX I D     Transfer Register to Memory; post-inc/pre-dec; D==0: A -> M[B+X], X+=(2*I-1); D=1: X+=(2*I-1), M[B+X] -> A;  
 05 111110 AAA BBB XXX D      Transfer Register to Memory; D==0 A -> M[B+X], D=1 M[B+X] -> A
 06 1111110 CCCC SOOOO        Branch relative conditional; PC += #O (signed offset) if condition met
 07 11111110 AAA OO DDD       Unary ALU Op: op A -> D; NOT, CMP, TBC, TBS
-08 111111110 MMMMM OO        Modify PSW flags SET, CLR by Mask, ?
+08 111111110 AAA BBB O       Byte Ops: op A -> B: LOW, SXT
 09 1111111110 AAA XXX        Branch and Link Register indexed: PC+1 -> LR; A+X -> PC
-10 11111111110 AAA OO        Byte Ops: A -> op A; HIB, LOB, SXT, SWP? 
+10 11111111110 MMMM O        Modify PSW Flags (not I) O=0 CLR, O=1 SET by Mask M
 11 111111111110 IIII         Software Interrupt: M[I] -> PC
 12 1111111111110 AAA         Set address register address in PSW: SAR
 13 11111111111110 XX
-14 111111111111110 X
+14 111111111111110 X         Enable/Disable Interrupts X=1: ENI, X=0 DIS
 15 1111111111111110
 16 1111111111111111          Halt
 
