@@ -1,6 +1,6 @@
 8 regs 16 bit, 16-bit word addresses, 8x64k banked address space
 
-PSW   R0
+PSW   R0(=0)
 R1    R2
 R3    R4
 R5    LR(R6)
@@ -9,24 +9,26 @@ R5    LR(R6)
 PSW: C, Z, N, V, I, AAA <- LWA dest, BBBBBBBB <- Bank number
 PC: LSB is 0 -> Bank zero, Bank B from PSW else
 
-00 XXX XXX XXX XXX XXX 0    LWA Load word address into RA (selected by A bits in PSW, default 5)
-01 SX XXX XXX XXX 000 01    Branch and link relative: PC -> LR, PC += X
-01 SX XXX XXX XXX RRR 01    ASI Add signed immediate to Register, R != 0: R += X
-02 AAA OOO TTTT DDD 011     Shift Ops: op A, T times -> D, SHL, ASR, SLC, ARC, ROL, RLC, RAC
-03 BBBB BBBB X 000 0111     Set active bank to B
-03 AAA OOO BBB DDD 0111     Binary ALU Op: A op B -> D; AND, IOR, XOR, ADD, ADC, SUB, SBC
-04 AAA BBB XXX I D 01111    Transfer Register to Memory; post-inc/pre-dec; D==0: A -> M[B+X], X+=(2*I-1); D=1: X+=(2*I-1), M[B+X] -> A;  
-05 AAA BBB XXX D 011111     Transfer Register to Memory; D==0 A -> M[B+X], D=1 M[B+X] -> A
-06 CCCC SOOOO 0111111       Branch relative conditional; PC += signed offset if condition met
-07 AAA OO DDD 01111111      Unary ALU Op: op A -> D; NOT, CMP, TBC, TBS
-08 MMMMM OO 011111111       Modify PSW flags SET, CLR by Mask, ?
-09 AAA XXX 0111111111       Branch and Link Register indexed: PC -> LR; A+X -> PC
-10 AAA OO 01111111111       Byte Ops: A -> op A; HIB, LOB, SXT, SWP? 
-11 IIII 011111111111        Software Interrupt: M[I] -> PC
-12 AAA 0111111111111        Set address register address in PSW: SAR
-13
-14
-15 1111111111111111         Halt
+00 0 XXX XXX XXX XXX XXX     LWA Load word address into RA (selected by A bits in PSW, default 5)
+01 10 SX XXX XXX XXX 000     Branch and link relative: PC+1 -> LR, PC += #X
+01 110 SX XXX XXX XXX RRR    ASI Add signed immediate to Register, R != 0: R += #X
+02 110 AAA OOO TTTT DDD      Shift Ops: op A, T times -> D, SHL, ASR, SLC, ARC, ROL, RLC, RAC
+03 1110 BBBB BBBB X 000      Set active bank to B
+03 1110 AAA OOO BBB DDD      Binary ALU Op: A op B -> D; AND, IOR, XOR, ADD, ADC, SUB, SBC
+04 11110 000 BBB AAA I D     Transfer PSW to memory, from memory (push, pop, see below)
+04 11110 AAA BBB XXX I D     Transfer Register to Memory; post-inc/pre-dec; D==0: A -> M[B+X], X+=(2*I-1); D=1: X+=(2*I-1), M[B+X] -> A;  
+05 111110 AAA BBB XXX D      Transfer Register to Memory; D==0 A -> M[B+X], D=1 M[B+X] -> A
+06 1111110 CCCC SOOOO        Branch relative conditional; PC += #O (signed offset) if condition met
+07 11111110 AAA OO DDD       Unary ALU Op: op A -> D; NOT, CMP, TBC, TBS
+08 111111110 MMMMM OO        Modify PSW flags SET, CLR by Mask, ?
+09 1111111110 AAA XXX        Branch and Link Register indexed: PC+1 -> LR; A+X -> PC
+10 11111111110 AAA OO        Byte Ops: A -> op A; HIB, LOB, SXT, SWP? 
+11 111111111110 IIII         Software Interrupt: M[I] -> PC
+12 1111111111110 AAA         Set address register address in PSW: SAR
+13 11111111111110 XX
+14 111111111111110 X
+15 1111111111111110
+16 1111111111111111          Halt
 
 Address extension: PSW holds 8-bit bank number, LSB of Address selects bank zero or active bank
 
@@ -37,14 +39,8 @@ Memory map: 0x00 0x0000: Reset Vector
             ...
             0x00 0x????: Memory Mapped IO
             ---
-            0x00 0xE000: Character Screen (8 bits per char + 8 bits attributes)
-            0x00 0xFFFF: Top
-            
-            0xX0 0x0000: Framebuffer 800x640 plane #0
+            0x00 0x7000: Character Screen (8 bits per char + 8 bits attributes)
+            0x00 0x7FFF: Top
+            0x01 0x0000: Bank #1
             ...
-            0xX0 0xFFFF: Framebuffer top of plane #0
-            0xX7 0x0000: Framebuffer 800x640 plane #7 ????
-            ...
-            0xX0 0xFFFF: Framebuffer top of plane #7
-            ...
-            0xFF 0xFFFF: Max mem
+            0xFF 0x7FFF: Top Bank #255
