@@ -12,24 +12,24 @@ PC: LSB is 0 -> Bank zero, Bank B from PSW else
 00 0 XXX XXX XXX XXX XXX     LWA Load word address into RA (selected by A bits in PSW, default 0 -> PC, JMP abs)
 01 10 SX XXX XXX XXX 000     Branch and link relative: PC+1 -> LR, PC += #X
 01 10 SX XXX XXX XXX RRR     ASI Add signed immediate to Register, R != 0: R += #X 
-02 110 OOO XX D RRR 000 1   Transfer PSW; D=0: PSW -> R; D=1 R -> PSW; OOO: Op Hi, Lo-Byte, ?
-02 110 AAA OOO BBB DDD I     Binary ALU Op: A op B -> D; I=1: A op #B -> D; AND, IOR, XOR, ADD, ADC, SUB, SBC
+02 110 AAA CCCC BBB 000      Branch and link conditional register indexed: if C then PC+1 -> LR, A+B -> PC
+02 110 AAA I OOO BBB DDD     Binary ALU Op: A op B -> D; I=1: A op #B -> D; AND, IOR, XOR, ADD, ADC, SUB, SBC
 03 1110 AAA OOO 000 DDD      Unary ALU Op: op A -> D; NOT, CMP, TBC, TBS
 03 1110 AAA OOO TTT DDD      Shift Ops (T > 0): op A, T times -> D; SHL, ASR, SLC, ARC, ROL, RLC, RAC
 04 11110 D I 000 BBB XXX     Transfer PSW to memory, from memory (push, pop, see below)
 04 11110 D I AAA BBB XXX     Transfer Register to Memory; post-inc/pre-dec; D==0: A -> M[B+X], X+=(2*I-1); D=1: X+=(2*I-1), M[B+X] -> A;  
 05 111110 D AAA BBB XXX      Transfer Register to Memory; D==0 A -> M[B+X], D=1 M[B+X] -> A
-06 1111110 CCCC SOOOO        Branch relative conditional; PC += #O (signed offset) if condition met
+06 1111110 CCCC SOOOO        Branch conditional relative immediate; if C then PC += #O (signed offset)
 07 11111110 BBBBBBBB         Set active bank to B
 08 111111110 AAA BBB O       Bytes Ops: op A -> B: LOW, SXT
-09 1111111110 AAA XXX        Branch and Link Register indexed: PC+1 -> LR; A+X -> PC
+09 1111111110 RRR D O        Transfer Bank no. to/from R D=0: PSW & FF -> R; D=1: (PSW & FF00) | (R & FF) -> PSW
 10 11111111110 MMMM O        Modify PSW Flags (not I) O=0 CLR, O=1 SET by Mask M
-11 111111111110 IIII         Software Interrupt: M[I] -> PC
+11 111111111110 IIII         Software Interrupt: M[#I] -> PC
 12 1111111111110 AAA         Set address register address in PSW: SAR
-13 11111111111110 XX
+13 11111111111110 OO         Ext. arithmetics: O=11: MUL: R3 * R4 -> R2::R1; O=10: MAC: R2::R1 + R3 * R4 -> R2::R1; O=0x: DIV R1::R2 / R3 -> R4, x=1 remainder in R5
 14 111111111111110 X         Enable/Disable Interrupts X=1: ENI, X=0 DIS
-15 1111111111111110          Halt and catch fire, HCF
-16 1111111111111111          Halt, HLT
+15 1111111111111110          Halt, HLT
+16 1111111111111111          No Operation, NOP
 
 Address extension: PSW holds 8-bit bank number, LSB of Address selects bank zero or active bank
 
