@@ -13,7 +13,7 @@ RUN
 Logic blocks: Incement/Decrement IDC(I +/- 1 -> O), Arithmetic/Logic ALU(0 op 1 op C -> R), 
                   Shifter SFT(op(I) x T -> O), Sign Extend SXT, Multiplier/Divider MDC(0 op 1 -> R)
 
-Fetch: PC -> MAR, PC -> IDCI, R -> R/W; STEP; MBR -> IR, IDCO -> PC
+Fetch: PC -> MAR, PC -> IDCI, R -> R/W; STEP; MBR -> IR, IDCO -> PC; STEP
 
 00 0 XXX XXX XXX XXX XXX     LWA Load word address into RA (selected by A bits in PSW, default 0 -> PC, JMP abs)
                              MBR -> R[PSW5::7]; STEP
