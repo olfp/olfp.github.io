@@ -3,8 +3,8 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Zebu — Anleitung</title>
-    <meta name="description" content="Zebu erfasst deine Zeit als Termine in einem eigenen Kalender. Die Anleitung." />
+    <title>Zebu — Handbuch</title>
+    <meta name="description" content="Zebu erfasst deine Zeit als Termine in einem eigenen Kalender. Das Handbuch." />
     <style>
       /*
         The app's own palette, not a second one. These are the same values as in
@@ -130,57 +130,29 @@
       }
       pre code { font-size: 0.875rem; }
 
-      /* The three tabs, as a segmented row — the app's own idiom. */
-      /*
-        Two rows, and they stick together: the document switcher and the language
-        row for that document. They are one sticky header rather than two sticky
-        headers, because two would each try to occupy the top and the second would
-        push the first out of view.
-      */
-      .doctabs, .tabrow {
+      /* The three language tabs, as a segmented row — the app's own idiom. */
+      .tabrow {
         position: sticky;
+        top: 0;
         display: flex;
         gap: 0.375rem;
         padding: 0.5rem 0;
         background: var(--bg);
+        border-bottom: 0.5px solid var(--separator);
       }
-      .doctabs { top: 0; border-bottom: 0.5px solid var(--separator); margin-bottom: 0; }
-      .tabrow { top: 2.6rem; border-bottom: 0.5px solid var(--separator); }
 
       /*
-        ...and this one, for the same reason as the rule on .manual further down.
-        The hidden attribute works through the UA rule of that name, whose
+        The hidden attribute needs this rule, for the same reason as the one on
+        .manual further down: it works through the UA rule of that name, whose
         specificity is that of an attribute selector and therefore loses to a plain
-        class. Both rows carry display:flex from the rule above, so **neither was
-        ever hidden**: two rows of language flags at once, and clicking the document
-        switcher appeared to do nothing. Found by looking at the page, not by
-        reading the CSS — and it is the second time this exact mistake has been made
-        in this file.
+        class. The row carries display:flex from the rule above, so without this it
+        would never be hidden.
 
         (No backticks in this comment, and that is not a style choice: the whole
         stylesheet is one template literal, so a backtick here ends the string and
         the next word is read as TypeScript. Two builds died on it.)
       */
       .tabrow[hidden] { display: none; }
-
-      /* The document switcher is a step, not a choice of three: it is wider, and
-         its selected state is a tint rather than a fill. */
-      .doctab {
-        flex: 0 1 auto;
-        padding: 0.25rem 0.625rem;
-        border: 0;
-        border-radius: 0.375rem;
-        background: transparent;
-        color: var(--secondary);
-        font: inherit;
-        font-size: 0.8125rem;
-        cursor: pointer;
-      }
-      .doctab[aria-selected="true"] {
-        background: color-mix(in srgb, var(--tint-fill) 14%, transparent);
-        color: var(--label);
-        font-weight: 600;
-      }
 
       .tab {
         flex: 1;
@@ -227,7 +199,8 @@
         }
 
         .manual > h1 { grid-column: 1 / -1; }
-        .manual > .contents { grid-row: 2; grid-column: 1; position: sticky; top: 5rem; }
+        /* Below the one sticky tab row, which is about 3rem tall. */
+        .manual > .contents { grid-row: 2; grid-column: 1; position: sticky; top: 3.25rem; }
         .manual > .body { grid-row: 2; grid-column: 2; }
 
         /*
@@ -267,225 +240,18 @@
       footer p:last-child { margin-bottom: 0; }
 
       @media print {
-        .doctabs, .tabrow, .contents { display: none; }
+        .tabrow, .contents { display: none; }
       }
     </style>
   </head>
   <body>
     <main>
-      <div class="doctabs" role="tablist" aria-label="Handbuch">
-        <button type="button" class="doctab" role="tab" id="doctab-kurz" aria-controls="group-kurz" aria-selected="true" data-doctab="kurz">Kurzfassung (in der App)</button>
-        <button type="button" class="doctab" role="tab" id="doctab-handbuch" aria-controls="group-handbuch" aria-selected="false" data-doctab="handbuch">Handbuch</button>
+      <div class="tabrow" id="group-handbuch" data-for="handbuch">
+        <button type="button" class="tab" role="tab" id="tab-de" aria-controls="manual-de" aria-selected="false" data-tab="de">🇩🇪 Deutsch</button>
+        <button type="button" class="tab" role="tab" id="tab-en" aria-controls="manual-en" aria-selected="false" data-tab="en">🇬🇧 English</button>
+        <button type="button" class="tab" role="tab" id="tab-es" aria-controls="manual-es" aria-selected="false" data-tab="es">🇪🇸 Español</button>
       </div>
-      <div class="tabrow" id="group-kurz" data-for="kurz">
-        <button type="button" class="tab" role="tab" id="tab-kurz-de" aria-controls="manual-kurz-de" aria-selected="false" data-doc="kurz" data-tab="de">🇩🇪 Deutsch</button>
-        <button type="button" class="tab" role="tab" id="tab-kurz-en" aria-controls="manual-kurz-en" aria-selected="false" data-doc="kurz" data-tab="en">🇬🇧 English</button>
-        <button type="button" class="tab" role="tab" id="tab-kurz-es" aria-controls="manual-kurz-es" aria-selected="false" data-doc="kurz" data-tab="es">🇪🇸 Español</button>
-      </div>
-      <div class="tabrow" id="group-handbuch" data-for="handbuch" hidden>
-        <button type="button" class="tab" role="tab" id="tab-handbuch-de" aria-controls="manual-handbuch-de" aria-selected="false" data-doc="handbuch" data-tab="de">🇩🇪 Deutsch</button>
-        <button type="button" class="tab" role="tab" id="tab-handbuch-en" aria-controls="manual-handbuch-en" aria-selected="false" data-doc="handbuch" data-tab="en">🇬🇧 English</button>
-        <button type="button" class="tab" role="tab" id="tab-handbuch-es" aria-controls="manual-handbuch-es" aria-selected="false" data-doc="handbuch" data-tab="es">🇪🇸 Español</button>
-      </div>
-    <article class="manual" id="manual-kurz-de" lang="de" data-doc="kurz" data-language="de" hidden>
-      <h1>Hilfe</h1>
-      <nav class="contents" aria-label="Inhalt">
-        <h2>Inhalt</h2>
-        <ul>
-        <li class="stufe-2"><a href="#abschnitt-zeit-erfassen">Zeit erfassen</a></li>
-        <li class="stufe-2"><a href="#abschnitt-einträge">Einträge</a></li>
-        <li class="stufe-2"><a href="#abschnitt-das-zeitraster">Das Zeitraster</a></li>
-        <li class="stufe-2"><a href="#abschnitt-pausen">Pausen</a></li>
-        <li class="stufe-2"><a href="#abschnitt-anwesenheit">Anwesenheit</a></li>
-        <li class="stufe-2"><a href="#abschnitt-export">Export</a></li>
-        <li class="stufe-2"><a href="#abschnitt-wenn-etwas-nicht-klappt">Wenn etwas nicht klappt</a></li>
-        <li class="stufe-2"><a href="#abschnitt-über-zebu">Über Zebu</a></li>
-        </ul>
-      </nav>
-      <div class="body">
-<p>Zebu erfasst deine Zeit als Termine in einem eigenen Kalender. Alles liegt auf diesem Gerät und in diesem Kalender — nichts wird sonstwohingeschickt, und Zebu braucht kein Netz.</p>
-<h2 id="abschnitt-zeit-erfassen">Zeit erfassen</h2>
-<ul>
-      <li>Wähle ein Projekt, schreibe hin, was du tust, und tippe auf Start. Die Uhr läuft weiter, auch wenn die App zu ist — die verstrichene Zeit ergibt sich immer aus Jetzt minus Start, nie aus einem Zähler im Speicher.</li>
-      <li>Stop beendet den Eintrag. Findet Zebu beim Starten eine bereits laufende Zeit, sagt es das vorher.</li>
-      <li>Der Projektname steht in eckigen Klammern vor deiner Tätigkeit: [Kunde A] Rechnung schreiben. Die Klammern sind der einzige Teil, den Zebu auswertet; was dahinter steht, gehört dir.</li>
-    </ul>
-<h2 id="abschnitt-einträge">Einträge</h2>
-<ul>
-      <li>Zebu zeigt <strong>einen Tag</strong> auf dem Schirm — heute, oder sonst den letzten Tag mit Einträgen. Die Pfeile links und rechts gehen zum nächsten und zum vorherigen Tag mit Daten; ein Tippen auf das Datum öffnet die Datumswahl.</li>
-      <li>Jeder Eintrag liegt in einem eigenen Kalender — du kannst ihn in der Kalender-App von Apple nachsehen. Änderungen, die du dort triffst, liest Zebu beim nächsten Öffnen mit; korrigieren und löschen tust du in Zebu.</li>
-      <li><strong>Wischen nach links</strong> auf einer Zeile deckt zwei Knöpfe auf: Markieren und Löschen. Markieren liegt am Rand, weil es ungefährlich ist; der Papierkorb muss weitergeschoben werden. Vor dem Löschen fragt Zebu immer nach.</li>
-      <li>Das Trichter-Icon links oben im Titel schaltet zwischen allen Einträgen und nur den markierten. Die kleine Zahl daneben sagt, wie viele markiert sind.</li>
-    </ul>
-<h2 id="abschnitt-das-zeitraster">Das Zeitraster</h2>
-<ul>
-      <li>Zeiten werden in Schritten gebucht: der Start wird abgerundet, das Ende aufgerundet. So wird dir nie Zeit weggebogen. Sieben Minuten werden als Viertelstunde erfasst.</li>
-      <li>Den Schritt legst du in den Einstellungen fest. Er gilt für den Timer, für von Hand erfasste Zeiten und für die Anwesenheit gleichermaßen.</li>
-      <li>Standardmäßig zählt Zebu damit <strong>angefangene Rasterzeiträume</strong>: ein Block von 9:07 bis 11:52 wird als 9:00 bis 12:00 gebucht, also drei Stunden statt zwei Stunden fünfundvierzig. Der Schalter „Zeiten mathematisch runden&quot; dreht das um und rundet jedes Ende einzeln auf die nächstgelegene Grenze — dasselbe Beispiel ergibt dann 9:00 bis 11:45.</li>
-      <li>Eine Änderung gilt nur für neue Einträge. Was bereits erfasst ist, behält den Schritt, mit dem es erfasst wurde.</li>
-    </ul>
-<h2 id="abschnitt-pausen">Pausen</h2>
-<ul>
-      <li>Eine Pause ist eine <strong>eigene Buchung</strong>, keine Abzugsposition. Sie liegt neben der Arbeit, nicht in ihr: die Tagessumme zeigt die gearbeitete Zeit, und die Pause steht als eigener Eintrag daneben.</li>
-      <li>Tippe auf „Zurück aus der Pause&quot; mit der Länge deiner Pause. Sie darf mitten in einer laufenden Zeit liegen; deine Zeit läuft dabei weiter, und du musst den Timer nicht erst stoppen.</li>
-      <li>Rechnet Zebu eine Pause automatisch ein, dann erst nach mehr als sechs Stunden Arbeit, und zwar nur in eine freie Lücke, nie über einem Eintrag. Die Startseite sagt dir, wenn das passiert ist.</li>
-    </ul>
-<h2 id="abschnitt-anwesenheit">Anwesenheit</h2>
-<ul>
-      <li>Lege einen Arbeitsort mit Code an, und Zebu bemerkt, wenn du ankommst, und erfasst die Zeit für dich.</li>
-      <li>Ein Anwesenheitseintrag bekommt das Projekt aus den Einstellungen und den Ortscode im Ortsfeld des Kalenders. Die Tätigkeit schreibst du selbst.</li>
-      <li>Zwei dicht aufeinanderfolgende Besuche werden zu einem Eintrag. Haben sie unterschiedliche Tätigkeiten, bleiben sie getrennt — der zweite beginnt dann, wo der erste endete.</li>
-    </ul>
-<h2 id="abschnitt-export">Export</h2>
-<ul>
-      <li>Der Export schreibt eine Datei in die Teilen-Mappe; du entscheidest, wo sie landet. Ein Profil sagt, welche Spalten in welcher Reihenfolge in welcher Form.</li>
-      <li>Eine Pause wird <strong>mit exportiert</strong>, als eigene Zeile mit dem Projekt „Pause&quot;. Die Arbeitszeit, in der sie liegt, wird dadurch nicht kürzer.</li>
-      <li>CSV-Dateien tragen ein Byte-Order-Mark und trennen mit Semikolon — so liest Excel sie in deutscher Umgebung richtig ein.</li>
-    </ul>
-<h2 id="abschnitt-wenn-etwas-nicht-klappt">Wenn etwas nicht klappt</h2>
-<ul>
-      <li>Anwesenheit braucht Standortzugriff im Hintergrund. Mit Zugriff nur „bei Verwendung&quot; kann Zebu einen Ort einrichten, aber nicht bemerken, wenn du mit geschlossener App ankommst.</li>
-      <li>Beendetst du Zebu erzwungen über den App-Switcher, stoppt die Anwesenheit — das ist iOS-Verhalten. Öffne die App wieder, dann läuft es weiter.</li>
-      <li>Hat Zebu eine Ankunft erfasst, aber dein Gehen nie gesehen, fragt es nach, wann du gegangen bist, statt zu raten. Eine falsche Endzeit wäre schlimmer als die Frage.</li>
-      <li>Das Löschen eines Eintrags entfernt einen echten Kalendertermin. Zebu fragt vorher, und es gibt kein Rückgängig — deshalb fragt es.</li>
-    </ul>
-<h2 id="abschnitt-über-zebu">Über Zebu</h2>
-<p>Dieses Projekt wurde vollständig mit KI erstellt. Der Dank geht an Big Pickle, Space Bunny Free, die Teams von OpenCode und OpenChamber.</p>
-      </div>
-    </article>
-    <article class="manual" id="manual-kurz-en" lang="en" data-doc="kurz" data-language="en" hidden>
-      <h1>Help</h1>
-      <nav class="contents" aria-label="Inhalt">
-        <h2>Inhalt</h2>
-        <ul>
-        <li class="stufe-2"><a href="#abschnitt-recording-time">Recording time</a></li>
-        <li class="stufe-2"><a href="#abschnitt-entries">Entries</a></li>
-        <li class="stufe-2"><a href="#abschnitt-the-time-grid">The time grid</a></li>
-        <li class="stufe-2"><a href="#abschnitt-breaks">Breaks</a></li>
-        <li class="stufe-2"><a href="#abschnitt-attendance">Attendance</a></li>
-        <li class="stufe-2"><a href="#abschnitt-export">Export</a></li>
-        <li class="stufe-2"><a href="#abschnitt-when-something-does-not-work">When something does not work</a></li>
-        <li class="stufe-2"><a href="#abschnitt-about-zebu">About Zebu</a></li>
-        </ul>
-      </nav>
-      <div class="body">
-<p>Zebu records your time as events in a calendar of its own. Everything stays on this device and in this calendar — nothing is sent anywhere, and Zebu needs no network.</p>
-<h2 id="abschnitt-recording-time">Recording time</h2>
-<ul>
-      <li>Pick a project, write down what you are doing, and tap Start. The clock keeps running when the app is closed — elapsed time is always now minus start, never a counter held in memory.</li>
-      <li>Stop ends the entry. If Zebu finds a time still running when it starts, it says so first.</li>
-      <li>The project name goes in square brackets before your activity: [Client A] Writing an invoice. The brackets are the only part Zebu reads; whatever follows belongs to you.</li>
-    </ul>
-<h2 id="abschnitt-entries">Entries</h2>
-<ul>
-      <li>Zebu shows <strong>one day</strong> on screen — today, or otherwise the last day that has entries. The arrows left and right move to the next and previous day with data; tapping the date opens a date picker.</li>
-      <li>Every entry sits in its own calendar, so you can look at it in Apple&#39;s Calendar app. Changes you make there are read the next time Zebu opens; correcting and deleting happens in Zebu.</li>
-      <li><strong>Swiping left</strong> on a row uncovers two buttons: Mark and Delete. Mark sits nearest the edge because it is the harmless one, and the bin has to be dragged further. Zebu always asks before deleting.</li>
-      <li>The funnel icon left of the title switches between all entries and only the marked ones. The small number beside it says how many are marked.</li>
-    </ul>
-<h2 id="abschnitt-the-time-grid">The time grid</h2>
-<ul>
-      <li>Times are booked in steps: the start is rounded down and the end up. That way time is never shaved off. Seven minutes are recorded as a quarter of an hour.</li>
-      <li>You set the step in the settings. It applies to the timer, to times entered by hand, and to attendance alike.</li>
-      <li>By default Zebu therefore counts <strong>started grid periods</strong>: a block from 09:07 to 11:52 is booked as 09:00 to 12:00, three hours rather than two hours forty-five. The &quot;Round times mathematically&quot; switch turns that around and rounds each end on its own to the nearest boundary — the same example becomes 09:00 to 11:45.</li>
-      <li>A change applies to new entries only. What has already been recorded keeps the step it was recorded with.</li>
-    </ul>
-<h2 id="abschnitt-breaks">Breaks</h2>
-<ul>
-      <li>A break is a <strong>record of its own</strong>, not a deduction. It sits beside the work rather than inside it: the day&#39;s total shows the time actually worked, and the break stands next to it as its own entry.</li>
-      <li>Tap &quot;Back from a break&quot; with the length of your break. It is allowed to sit in the middle of a running timer; your time keeps counting and you do not have to stop the timer first.</li>
-      <li>If Zebu books a break automatically, that is after more than six hours of work, and only into a free gap — never on top of an entry. The start screen tells you when it has done so.</li>
-    </ul>
-<h2 id="abschnitt-attendance">Attendance</h2>
-<ul>
-      <li>Set up a work location with a code and Zebu notices when you arrive, and records the time for you.</li>
-      <li>An attendance entry gets its project from the settings and the location code in the calendar&#39;s own location field. The activity is yours to write.</li>
-      <li>Two visits close together become one entry. If their activities differ they stay apart — and then the second begins where the first ended.</li>
-    </ul>
-<h2 id="abschnitt-export">Export</h2>
-<ul>
-      <li>The export writes a file into the share sheet and you decide where it lands. A profile says which columns, in which order, in which format.</li>
-      <li>A break is <strong>exported too</strong>, as its own row with the project &quot;Pause&quot;. The work it sits inside is not shortened by that.</li>
-      <li>CSV files carry a byte-order mark and are separated with semicolons, so Excel reads them correctly in a German locale.</li>
-    </ul>
-<h2 id="abschnitt-when-something-does-not-work">When something does not work</h2>
-<ul>
-      <li>Attendance needs background location access. With &quot;while using&quot; only, Zebu can set up a place but cannot notice your arrival with the app closed.</li>
-      <li>If you force-quit Zebu from the app switcher, attendance stops — that is iOS behaviour. Open the app again and it carries on.</li>
-      <li>If Zebu recorded an arrival but never saw you leave, it asks when you left instead of guessing. A wrong end time would be worse than the question.</li>
-      <li>Deleting an entry removes a real calendar event. Zebu asks first and there is no undo — which is why it asks.</li>
-    </ul>
-<h2 id="abschnitt-about-zebu">About Zebu</h2>
-<p>This project was created entirely with AI. Thanks go to Big Pickle, Space Bunny Free, the teams at OpenCode and OpenChamber.</p>
-      </div>
-    </article>
-    <article class="manual" id="manual-kurz-es" lang="es" data-doc="kurz" data-language="es" hidden>
-      <h1>Ayuda</h1>
-      <nav class="contents" aria-label="Inhalt">
-        <h2>Inhalt</h2>
-        <ul>
-        <li class="stufe-2"><a href="#abschnitt-registrar-tiempo">Registrar tiempo</a></li>
-        <li class="stufe-2"><a href="#abschnitt-registros">Registros</a></li>
-        <li class="stufe-2"><a href="#abschnitt-la-rejilla-de-tiempo">La rejilla de tiempo</a></li>
-        <li class="stufe-2"><a href="#abschnitt-pausas">Pausas</a></li>
-        <li class="stufe-2"><a href="#abschnitt-asistencia">Asistencia</a></li>
-        <li class="stufe-2"><a href="#abschnitt-exportar">Exportar</a></li>
-        <li class="stufe-2"><a href="#abschnitt-cuando-algo-no-funciona">Cuando algo no funciona</a></li>
-        <li class="stufe-2"><a href="#abschnitt-sobre-zebu">Sobre Zebu</a></li>
-        </ul>
-      </nav>
-      <div class="body">
-<p>Zebu registra tu tiempo como eventos en un calendario propio. Todo permanece en este dispositivo y en ese calendario: no se envía nada a ninguna parte, y Zebu no necesita red.</p>
-<h2 id="abschnitt-registrar-tiempo">Registrar tiempo</h2>
-<ul>
-      <li>Elige un proyecto, escribe lo que estás haciendo y toca Iniciar. El reloj sigue corriendo aunque la app esté cerrada: el tiempo transcurrido es siempre ahora menos inicio, nunca un contador en memoria.</li>
-      <li>Detener cierra el registro. Si Zebu encuentra un tiempo en curso al arrancar, lo dice antes.</li>
-      <li>El nombre del proyecto va entre corchetes antes de tu actividad: [Cliente A] Escribir una factura. Los corchetes son la única parte que Zebu interpreta; lo que va detrás es tuyo.</li>
-    </ul>
-<h2 id="abschnitt-registros">Registros</h2>
-<ul>
-      <li>Zebu muestra <strong>un día</strong> en pantalla: hoy, o si no el último día con registros. Las flechas izquierda y derecha llevan al día siguiente y al anterior con datos; tocar la fecha abre un selector de día.</li>
-      <li>Cada registro está en su propio calendario, así que puedes consultarlo en la app Calendario de Apple. Los cambios que hagas allí se leen la próxima vez que Zebu se abre; corregir y borrar se hace en Zebu.</li>
-      <li><strong>Deslizar a la izquierda</strong> sobre una fila descubre dos botones: Marcar y Borrar. Marcar queda en el borde porque es la acción inofensiva, y la papelera hay que arrastrarla más lejos. Zebu siempre pregunta antes de borrar.</li>
-      <li>El icono de embudo a la izquierda del título alterna entre todos los registros y solo los marcados. El número pequeño al lado dice cuántos hay marcados.</li>
-    </ul>
-<h2 id="abschnitt-la-rejilla-de-tiempo">La rejilla de tiempo</h2>
-<ul>
-      <li>Los tiempos se registran en pasos: el inicio se redondea hacia abajo y el final hacia arriba. Así nunca se te quita tiempo. Siete minutos se registran como un cuarto de hora.</li>
-      <li>El paso lo fijas en los ajustes. Vale por igual para el temporizador, para los tiempos introducidos a mano y para la asistencia.</li>
-      <li>Por defecto Zebu cuenta por tanto <strong>periodos de rejilla empezados</strong>: un bloque de 09:07 a 11:52 se registra como 09:00 a 12:00, tres horas en vez de dos horas y cuarenta y cinco minutos. El interruptor «Redondear tiempos matemáticamente» lo invierte y redondea cada extremo por separado al límite más cercano: ese mismo ejemplo queda 09:00 a 11:45.</li>
-      <li>Un cambio vale solo para registros nuevos. Lo ya registrado conserva el paso con el que se registró.</li>
-    </ul>
-<h2 id="abschnitt-pausas">Pausas</h2>
-<ul>
-      <li>Una pausa es un <strong>registro propio</strong>, no una resta. Está al lado del trabajo, no dentro: el total del día muestra el tiempo realmente trabajado, y la pausa aparece junto a él como su propio registro.</li>
-      <li>Toca «Volver de la pausa» con la duración de tu pausa. Puede caer en medio de un tiempo en marcha; tu tiempo sigue corriendo y no tienes que detener antes el temporizador.</li>
-      <li>Si Zebu registra una pausa automáticamente, es después de más de seis horas de trabajo, y solo en un hueco libre: nunca encima de un registro. La pantalla inicial te avisa cuando lo ha hecho.</li>
-    </ul>
-<h2 id="abschnitt-asistencia">Asistencia</h2>
-<ul>
-      <li>Define un lugar de trabajo con código y Zebu se dará cuenta cuando llegues, y registrará el tiempo por ti.</li>
-      <li>Un registro de asistencia recibe su proyecto de los ajustes y el código de lugar en el propio campo de ubicación del calendario. La actividad la escribes tú.</li>
-      <li>Dos visitas consecutivas se convierten en un registro. Si sus actividades difieren, se quedan separadas, y entonces el segundo empieza donde acabó el primero.</li>
-    </ul>
-<h2 id="abschnitt-exportar">Exportar</h2>
-<ul>
-      <li>La exportación escribe un archivo en el menú de compartir y tú decides dónde acaba. Un perfil indica qué columnas, en qué orden y en qué formato.</li>
-      <li>Una pausa se <strong>exporta también</strong>, como su propia fila con el proyecto «Pausa». El trabajo en el que está no se acorta por ello.</li>
-      <li>Los archivos CSV llevan marca de orden de bytes y se separan con punto y coma, para que Excel los lea bien en un entorno alemán.</li>
-    </ul>
-<h2 id="abschnitt-cuando-algo-no-funciona">Cuando algo no funciona</h2>
-<ul>
-      <li>La asistencia necesita acceso a la ubicación en segundo plano. Con acceso solo «al usar la app», Zebu puede configurar un lugar pero no notar tu llegada con la app cerrada.</li>
-      <li>Si fuerzas el cierre de Zebu desde el conmutador, la asistencia se detiene: es comportamiento de iOS. Vuelve a abrir la app y continúa.</li>
-      <li>Si Zebu registró una llegada pero nunca vio tu marcha, pregunta cuándo te fuiste en lugar de adivinar. Una hora de fin equivocada sería peor que la pregunta.</li>
-      <li>Borrar un registro elimina un evento real del calendario. Zebu pregunta antes y no hay forma de deshacerlo: por eso pregunta.</li>
-    </ul>
-<h2 id="abschnitt-sobre-zebu">Sobre Zebu</h2>
-<p>Este proyecto se creó íntegramente con IA. El agradecimiento es para Big Pickle, Space Bunny Free, los equipos de OpenCode y OpenChamber.</p>
-      </div>
-    </article>
-    <article class="manual" id="manual-handbuch-de" lang="de" data-doc="handbuch" data-language="de" hidden>
+    <article class="manual" id="manual-de" lang="de" data-language="de" hidden>
       <h1>Zebu — Benutzer-Handbuch</h1>
       <nav class="contents" aria-label="Inhalt">
         <h2>Inhalt</h2>
@@ -764,7 +530,7 @@ Projektzeit 10:00 – 12:00                     12:00 – 17:00</code></pre>
 <p>*Zebu 1.0 — Anwesenheit und Ortung sind verfügbar, der Export ebenfalls. Ein Import (also das Zurücklesen einer CSV) ist nicht enthalten.*</p>
       </div>
     </article>
-    <article class="manual" id="manual-handbuch-en" lang="en" data-doc="handbuch" data-language="en" hidden>
+    <article class="manual" id="manual-en" lang="en" data-language="en" hidden>
       <h1>Zebu — User Manual</h1>
       <nav class="contents" aria-label="Inhalt">
         <h2>Inhalt</h2>
@@ -1043,7 +809,7 @@ Projektzeit 10:00 – 12:00                     12:00 – 17:00</code></pre>
 <p>*Zebu 1.0 — attendance and location tracking are available, and so is the export. An import (that is, reading a CSV back in) is not included.*</p>
       </div>
     </article>
-    <article class="manual" id="manual-handbuch-es" lang="es" data-doc="handbuch" data-language="es" hidden>
+    <article class="manual" id="manual-es" lang="es" data-language="es" hidden>
       <h1>Zebu — Manual de usuario</h1>
       <nav class="contents" aria-label="Inhalt">
         <h2>Inhalt</h2>
@@ -1325,65 +1091,33 @@ Projektzeit 10:00 – 12:00                     12:00 – 17:00</code></pre>
     </main>
 
     <footer>
-      <p>Beide Anleitungen sind aus derselben Quelle erzeugt: die <strong>Kurzfassung</strong> aus <code>manual/*.md</code>, aus der auch die Hilfe in der App liest, das <strong>Handbuch</strong> aus <code>docs/handbuch/</code>.</p>
-      <p>Die Kurzfassung ist damit die Fassung, die ohne Netz offline in der App zur Verfügung steht. Das Handbuch ist ausführlicher und steht nur hier.</p>
+      <p>Diese Seite wird aus <code>docs/handbuch/{de,en,es}-lang.md</code> erzeugt.</p>
+      <p>Die Kurzfassung — kürzer, und offline in der App verfügbar — liegt in <code>help/{de,en,es}.md</code>.</p>
     </footer>
 
     <script>
       /*
-        Two things to choose — which document, and in which language — so the state
-        is a pair, not a string. One function sets both, which is what keeps the
-        three ways of changing it (document tab, language tab, browser language on
-        load) from disagreeing about what is on screen.
-
+        One thing to choose — the language — so the state is a single string.
         Written against the hidden attribute rather than a class, so an article that
         is somehow not hidden is *visibly* wrong rather than invisibly present.
       */
       (function () {
-        var doctabs = document.querySelectorAll('.doctab');
         var manuals = document.querySelectorAll('.manual');
-        var current = { doc: doctabs.length ? doctabs[0].dataset.doctab : 'kurz', tab: 'de' };
+        var current = 'de';
 
-        /*
-          Only the language row of the document being read is shown. Two rows of
-          three flags at once would not say which axis a flag belonged to.
-        */
-        function show(doc, code) {
-          current = { doc: doc, tab: code };
+        function show(code) {
+          current = code;
           manuals.forEach(function (manual) {
-            manual.hidden = !(manual.dataset.doc === doc && manual.dataset.language === code);
-          });
-          document.querySelectorAll('.tabrow').forEach(function (row) {
-            row.hidden = row.dataset.for !== doc;
+            manual.hidden = manual.dataset.language !== code;
           });
           document.querySelectorAll('.tab').forEach(function (tab) {
-            tab.setAttribute(
-              'aria-selected',
-              String(tab.dataset.doc === doc && tab.dataset.tab === code),
-            );
-          });
-          doctabs.forEach(function (tab) {
-            tab.setAttribute('aria-selected', String(tab.dataset.doctab === doc));
+            tab.setAttribute('aria-selected', String(tab.dataset.tab === code));
           });
         }
 
-        doctabs.forEach(function (tab) {
-          tab.addEventListener('click', function () {
-            var doc = tab.dataset.doctab;
-            /*
-              Switching document keeps the language, and falls back to German if
-              that language has not been translated into this document yet — a tab
-              is only rendered for an edition that exists, so asking is enough.
-            */
-            var row = document.querySelector('.tabrow[data-for="' + doc + '"]');
-            var exists = row && row.querySelector('.tab[data-tab="' + current.tab + '"]');
-            show(doc, exists ? current.tab : 'de');
-          });
-        });
-
         document.querySelectorAll('.tab').forEach(function (tab) {
           tab.addEventListener('click', function () {
-            show(tab.dataset.doc, tab.dataset.tab);
+            show(tab.dataset.tab);
           });
           tab.addEventListener('keydown', function (event) {
             var row = tab.closest('.tabrow');
@@ -1408,7 +1142,7 @@ Projektzeit 10:00 – 12:00                     12:00 – 17:00</code></pre>
         */
         var wanted = (navigator.language || 'de').slice(0, 2);
         var known = ['de', 'en', 'es'];
-        show('kurz', known.indexOf(wanted) !== -1 ? wanted : 'de');
+        show(known.indexOf(wanted) !== -1 ? wanted : 'de');
       })();
     </script>
   </body>
