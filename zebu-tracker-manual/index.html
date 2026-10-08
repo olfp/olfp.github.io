@@ -287,8 +287,9 @@
         <li class="stufe-2"><a href="#abschnitt-7-export">7. Export</a></li>
         <li class="stufe-3"><a href="#abschnitt-der-zeitraum">Der Zeitraum</a></li>
         <li class="stufe-3"><a href="#abschnitt-das-standardprofil">Das Standardprofil</a></li>
+        <li class="stufe-3"><a href="#abschnitt-konsolidiert-oder-roh">Konsolidiert oder roh</a></li>
         <li class="stufe-3"><a href="#abschnitt-eigene-profile">Eigene Profile</a></li>
-        <li class="stufe-3"><a href="#abschnitt-icalendar">iCalendar</a></li>
+        <li class="stufe-3"><a href="#abschnitt-wie-schreibe-ich-eine-export-datei">Wie schreibe ich eine Export-Datei</a></li>
         <li class="stufe-3"><a href="#abschnitt-was-exportiert-wird">Was exportiert wird</a></li>
         <li class="stufe-2"><a href="#abschnitt-8-wenn-etwas-nicht-klappt">8. Wenn etwas nicht klappt</a></li>
         <li class="stufe-2"><a href="#abschnitt-9-was-zebu-absichtlich-nicht-tut">9. Was Zebu absichtlich nicht tut</a></li>
@@ -477,7 +478,7 @@ Projektzeit 10:00 – 12:00                     12:00 – 17:00</code></pre>
     </ul>
 <p>Die Zahl auf dem Knopf zählt <strong>nur diesen Zeitraum</strong> — sie ist keine Schätzung. Solange sie nicht gezählt ist, steht dort schlicht <strong>„Exportieren&quot;</strong>: Eine Zahl, die Zebu nicht kennt, ist keine.</p>
 <h3 id="abschnitt-das-standardprofil">Das Standardprofil</h3>
-<p><code>Default (CSV)</code> — <code>Tag;Von;Bis;Projekt-Id;Sub-Id;Beschreibung</code></p>
+<p><code>Default</code> — <code>Tag;Von;Bis;Projekt-Id;Sub-Id;Beschreibung</code>, als CSV.</p>
 <p>Es kann <strong>nicht gelöscht</strong> werden: Es ist das einzige Profil einer neuen Installation, und ohne es wäre der Export-Tab leer.</p>
 <div class="tablewrap"><table><thead><tr><th>Spalte</th><th>Inhalt</th></tr></thead><tbody><tr><td><strong>Tag</strong></td><td><code>2026-10-01</code></td></tr><tr><td><strong>Von</strong> / <strong>Bis</strong></td><td><code>09:00</code> / <code>11:00</code> in deiner Zeitzone</td></tr><tr><td><strong>Projekt-Id</strong> / <strong>Sub-Id</strong></td><td>Die Nummern aus dem Projekt. <strong>Leer</strong>, wenn das Projekt keine hat oder nicht (mehr) existiert.</td></tr><tr><td><strong>Beschreibung</strong></td><td>Die Tätigkeit</td></tr></tbody></table></div>
 <p>Zwei Dinge, die eine Tabelle unbemerkt ruinieren und deshalb hier feststehen:</p>
@@ -486,18 +487,40 @@ Projektzeit 10:00 – 12:00                     12:00 – 17:00</code></pre>
       <li><strong>Mit Byte-Order-Mark am Anfang.</strong> Beschreibungen enthalten Umlaute; ohne die Markierung liest Excel die Datei als Latin-1 und jedes <code>ä</code> wird zu <code>Ã¤</code>.</li>
     </ul>
 <p>Enthält eine Beschreibung ein Semikolon oder ein Anführungszeichen, wird das korrekt in Anführungszeichen gesetzt. Du musst nichts vorbereiten.</p>
+<h3 id="abschnitt-konsolidiert-oder-roh">Konsolidiert oder roh</h3>
+<p>Das Standardprofil exportiert <strong>konsolidiert</strong> (<code>kind: &quot;range&quot;</code>). Das heißt: zu einer Zeit ist genau ein Projekt aktiv.</p>
+<div class="tablewrap"><table><thead><tr><th>Das passiert</th><th>Wie</th></tr></thead><tbody><tr><td><strong>Pause</strong></td><td>Steht <strong>nicht</strong> in der Datei. Sie ist kein Projekt, sondern dessen Fehlen.</td></tr><tr><td><strong>Arbeit mit einer Pause darin</strong></td><td>Kommt in zwei Stücken heraus. 09:00–12:00 mit einer Pause von 10:00 bis 10:30 wird zu 09:00–10:00 und 10:30–12:00.</td></tr><tr><td><strong>Zwei Einträge, die sich überschneiden</strong></td><td>Der <strong>kürzere</strong> behält seine Zeit, der längere wird darum herum zerschnitten. Beide kommen vor.</td></tr><tr><td><strong>Deine Kalenderdaten</strong></td><td>Werden <strong>nicht</strong> verändert. Konsolidiert wird nur in der Datei.</td></tr></tbody></table></div>
+<p>Willst du die gebuchten Zeiten mit stehenden Pausen, ist das ein eigenes Profil mit <code>kind: &quot;raw&quot;</code> — dieselben Daten, nur nicht zusammengeführt. Du kannst beide an einem Tag exportieren; es ist derselbe Datenbestand, zwei Ansichten.</p>
+<p><strong>Warum der kürzere gewinnt.</strong> Stell dir einen Handeintrag über den ganzen Tag vor — Seminar, Urlaub, Baustelle — und drei erfasste Kundenstunden darin. Gäbe das der längere Eintrag, wären die drei Stunden aus der Datei weg. Also gewinnt der kürzere, und der Tag kommt als zwei Stücke heraus, zwischen denen die Stunde liegt.</p>
 <h3 id="abschnitt-eigene-profile">Eigene Profile</h3>
-<p><strong>Einstellungen › Exportprofile › Neues Profil.</strong> Ein Profil legt fest:</p>
-<ul>
-      <li><strong>welche Spalten</strong> — Tag, Von, Bis, Dauer, Projekt, Projekt-Id, Sub-Id, Beschreibung, Ort</li>
-      <li><strong>in welcher Reihenfolge</strong> — Pfeil hoch und runter</li>
-      <li><strong>in welchem Format</strong> — CSV oder iCalendar</li>
-    </ul>
-<p>Verfügbare Spalten: <code>Tag</code>, <code>Von</code>, <code>Bis</code>, <code>Dauer</code>, <code>Projekt</code>, <code>Projekt-Id</code>, <code>Sub-Id</code>, <code>Beschreibung</code>, <code>Ort</code>.</p>
-<p>Bei <strong>iCalendar</strong> gibt es keine Spalten: Das Format hat eine feste Form. Die Spalten bleiben erhalten und sind wieder da, wenn du zurückwechselst.</p>
-<p><strong>Die Spaltenüberschriften folgen der App-Sprache.</strong> Auf einem deutschen Gerät schreibt das Standardprofil <code>Tag;Von;Bis;…</code>, auf einem englischen <code>Date;From;To;…</code>. Falls deine Buchhaltung feste englische Überschriften braucht, sag Bescheid — dann werden die Köpfe Teil des Profils.</p>
-<h3 id="abschnitt-icalendar">iCalendar</h3>
-<p>Ein Profil im Format iCalendar erzeugt eine <code>.ics</code>-Datei, die andere Kalender-Apps lesen. Das Kürzel steht im Titel des Termins, der Ortscode am Ort, und jede Termin-ID ist stabil — ein erneut importiertes, aktualisiertes Zertifikat aktualisiert die Termine also, statt sie zu verdoppeln.</p>
+<p>Profile <strong>entstehen in der App nicht mehr</strong>. Sie kommen aus einer <strong>JSON-Datei</strong>, die du im Export-Tab <strong>einfügst</strong> oder <strong>auswählst</strong> — unten auf dem Bildschirm, unterhalb des Export-Knopfes.</p>
+<p>Zwei Wege, weil es zwei Lagen gibt: Die Datei liegt auf dem Mac oder in einer Mail — dann kopierst du den Text und fügst ihn ein. Oder sie liegt auf dem Gerät — dann wählst du sie aus, und iOS öffnet seine Dateiauswahl.</p>
+<p><strong>Dieselbe </strong><code>id</code> ersetzt ein vorhandenes Profil. Das ist der einzige Weg, etwas zu korrigieren: dieselbe Datei noch einmal importieren, mit derselben <code>id</code> und einem korrigierten <code>export</code>. Sonst wird nichts entfernt.</p>
+<p>Zebu sagt dir, was es getan hat. Eine Spalte, die es nicht versteht, wird <strong>verworfen und gemeldet</strong> — der Rest des Profils kommt trotzdem an. Und Zebu schweigt nicht, wenn es eine Datei nicht lesen kann; das ist der Unterschied zwischen „kaputte Datei&quot; und „nichts importiert&quot;.</p>
+<p><strong>Die Spaltenüberschriften folgen der App-Sprache</strong> — beim eingebauten <code>Default</code>. Auf einem deutschen Gerät <code>Tag;Von;Bis;…</code>, auf einem englischen <code>Date;From;To;…</code>. In einem importierten Profil sind die Köpfe <strong>deine</strong>, genau wie in der Datei.</p>
+<h3 id="abschnitt-wie-schreibe-ich-eine-export-datei">Wie schreibe ich eine Export-Datei</h3>
+<p>Eine Datei ist ein JSON-Objekt mit vier Angaben und einer Liste von Spalten.</p>
+<pre><code>{
+  &quot;id&quot;: &quot;steuerung-2026&quot;,
+  &quot;name&quot;: &quot;Steuerung 2026&quot;,
+  &quot;format&quot;: &quot;csv&quot;,
+  &quot;kind&quot;: &quot;range&quot;,
+  &quot;fields&quot;: [
+    { &quot;export&quot;: &quot;Datum&quot;, &quot;from&quot;: &quot;date&quot; },
+    { &quot;export&quot;: &quot;Von&quot;, &quot;from&quot;: &quot;from&quot; }
+  ]
+}</code></pre>
+<div class="tablewrap"><table><thead><tr><th>Angabe</th><th>Bedeutung</th></tr></thead><tbody><tr><td><code>id</code></td><td>Eindeutig. Gleiche <code>id</code> beim zweiten Import = ersetzen.</td></tr><tr><td><code>name</code></td><td>Was in der Profiliste steht.</td></tr><tr><td><code>format</code></td><td><code>csv</code>, <code>json</code> oder <code>xml</code>.</td></tr><tr><td><code>kind</code></td><td><code>range</code> (konsolidiert) oder <code>raw</code> (wie gebucht). Fehlt es, gilt <code>range</code>.</td></tr></tbody></table></div>
+<p><strong>Die internen Feldnamen sind englisch</strong> — das ist der eine Teil der Datei, den Zebu nicht übersetzt:</p>
+<div class="tablewrap"><table><thead><tr><th><code>from</code></th><th>Inhalt</th></tr></thead><tbody><tr><td><code>date</code></td><td>Der Tag, als <code>YYYY-MM-DD</code></td></tr><tr><td><code>from</code> / <code>to</code></td><td>Beginn und Ende, als <code>HH:mm</code></td></tr><tr><td><code>project</code></td><td>Der Projektname, etwa <code>Kunde A</code></td></tr><tr><td><code>projectId</code> / <code>subId</code></td><td>Die Nummern aus dem Projekt, <strong>leer</strong> wenn keine</td></tr><tr><td><code>description</code></td><td>Die Tätigkeit</td></tr><tr><td><code>location</code></td><td>Der Ortscode, etwa <code>HST3</code></td></tr></tbody></table></div>
+<p><strong>Eine Spalte</strong> kennt diese Angaben:</p>
+<div class="tablewrap"><table><thead><tr><th>Angabe</th><th>Bedeutung</th></tr></thead><tbody><tr><td><code>export</code></td><td>Die Überschrift in der Datei. Ohne sie nimmt Zebu die App-Sprache.</td></tr><tr><td><code>from</code></td><td>Ein Feldname, oder mehrere als Liste.</td></tr><tr><td><code>concat</code></td><td>Nur mit einer Liste: der Trennstring. <code>&quot;-&quot;</code> macht aus <code>123</code> und <code>7</code> die <code>123-7</code>.</td></tr><tr><td><code>delta</code></td><td>Nur mit einer Liste aus <strong>zwei</strong> Feldern: die Differenz der beiden Zeiten.</td></tr><tr><td><code>format</code></td><td>Das Ausgabemuster. Nur bei Datums-, Zeit- und <code>delta</code>-Spalten.</td></tr><tr><td><code>fixed</code></td><td>Ein fester Wert für diese Spalte. Ohne Quelle.</td></tr></tbody></table></div>
+<p><strong>Zwei Sorten Zettel.</strong> <code>concat</code> fügt Text zusammen, <code>delta</code> rechnet. <code>delta</code> mit <code>von</code> und <code>bis</code> ist die Dauer — 11:00 bis 12:30 sind 1,5 Stunden, mit <code>&quot;format&quot;: &quot;H,h&quot;</code>. Ein eigenes Feld <code>duration</code> gibt es nicht; dafür ist <code>delta</code> da, weil es dieselbe Zahl auch als <code>1:30</code> und als addierbare Dezimalzahl ausgeben kann.</p>
+<p><strong>Das Ausgabemuster</strong> ist eine Liste von Zeichen. Alles, was kein Zeichen der Tabelle ist, bleibt wörtlich stehen.</p>
+<div class="tablewrap"><table><thead><tr><th>Muster</th><th>Ergibt</th><th></th></tr></thead><tbody><tr><td><code>YYYY</code> / <code>YY</code></td><td><code>2026</code> / <code>26</code></td><td>Jahr</td></tr><tr><td><code>MM</code> / <code>M</code></td><td><code>10</code> / <code>10</code></td><td>Monat</td></tr><tr><td><code>DD</code> / <code>D</code></td><td><code>01</code> / <code>1</code></td><td>Tag</td></tr><tr><td><code>HH</code> / <code>H</code></td><td><code>09</code> / <code>9</code></td><td>Stunde</td></tr><tr><td><code>mm</code> / <code>m</code></td><td><code>30</code> / <code>30</code></td><td>Minute</td></tr><tr><td><code>H:mm</code></td><td><code>1:30</code></td><td>Vorgabe für <code>delta</code></td></tr><tr><td><code>H,h</code></td><td><code>1,5</code></td><td>Dezimalstunden — addierbar in der Tabelle</td></tr><tr><td><code>YYYY-MM-DD</code></td><td><code>2026-10-01</code></td><td>Vorgabe für <code>date</code></td></tr><tr><td><code>MM/DD/YY</code></td><td><code>10/01/26</code></td><td>Für eine amerikanische Buchhaltung</td></tr><tr><td><code>DD.MM.YYYY</code></td><td><code>01.10.2026</code></td><td></td></tr></tbody></table></div>
+<p><strong>Das Komma gehört zum Muster.</strong> Bei <code>H,h</code> schreibt Zebu <code>1,5</code>; bei <code>H.h</code> schreibt es <code>1.5</code>. Das Komma ist ein ganz gewöhnliches Zeichen im Muster — deshalb geht beides.</p>
+<p>Ohne <code>format</code> gilt <code>H:mm</code> für <code>delta</code>, <code>HH:mm</code> für <code>from</code> und <code>to</code> und <code>YYYY-MM-DD</code> für <code>date</code>.</p>
+<p>Ein vollständiges Beispiel aller Möglichkeiten liegt als Text in der App: Profil <strong>Zebu — vollständig (Testprofil)</strong> in <code>docs/export-profile.example.json</code>. Zwei weitere daneben: eins, das nur einfache Felder zeigt, und eins mit allen Möglichkeiten.</p>
 <h3 id="abschnitt-was-exportiert-wird">Was exportiert wird</h3>
 <p><strong>Alle Termine im gewählten Zeitraum</strong>, gleichgültig wie weit zurück. Zebu fragt den Kalender für genau diesen Zeitraum ab.</p>
 <p>Läuft ein Timer, endet er in der Datei „jetzt&quot; — mehr lässt sich über eine laufende Zeit nicht wissen.</p>
@@ -566,8 +589,9 @@ Projektzeit 10:00 – 12:00                     12:00 – 17:00</code></pre>
         <li class="stufe-2"><a href="#abschnitt-7-export">7. Export</a></li>
         <li class="stufe-3"><a href="#abschnitt-the-period">The period</a></li>
         <li class="stufe-3"><a href="#abschnitt-the-default-profile">The default profile</a></li>
+        <li class="stufe-3"><a href="#abschnitt-consolidated-or-raw">Consolidated or raw</a></li>
         <li class="stufe-3"><a href="#abschnitt-own-profiles">Own profiles</a></li>
-        <li class="stufe-3"><a href="#abschnitt-icalendar">iCalendar</a></li>
+        <li class="stufe-3"><a href="#abschnitt-how-do-i-write-an-export-file">How do I write an export file</a></li>
         <li class="stufe-3"><a href="#abschnitt-what-gets-exported">What gets exported</a></li>
         <li class="stufe-2"><a href="#abschnitt-8-when-something-does-not-work">8. When something does not work</a></li>
         <li class="stufe-2"><a href="#abschnitt-9-what-zebu-deliberately-does-not-do">9. What Zebu deliberately does not do</a></li>
@@ -756,7 +780,7 @@ Projektzeit 10:00 – 12:00                     12:00 – 17:00</code></pre>
     </ul>
 <p>The number on the button counts <strong>only this period</strong> — it is not an estimate. As long as it has not been counted, it simply says <strong>&quot;Export&quot;</strong>: a number Zebu does not know is no number.</p>
 <h3 id="abschnitt-the-default-profile">The default profile</h3>
-<p><code>Default (CSV)</code> — <code>Date;From;To;Project-Id;Sub-Id;Description</code></p>
+<p><code>Default</code> — <code>Date;From;To;Project-Id;Sub-Id;Description</code>, as CSV.</p>
 <p>It <strong>cannot be deleted</strong>: it is the only profile of a new installation, and without it the export tab would be empty.</p>
 <div class="tablewrap"><table><thead><tr><th>Column</th><th>Content</th></tr></thead><tbody><tr><td><strong>Date</strong></td><td><code>2026-10-01</code></td></tr><tr><td><strong>From</strong> / <strong>To</strong></td><td><code>09:00</code> / <code>11:00</code> in your time zone</td></tr><tr><td><strong>Project-Id</strong> / <strong>Sub-Id</strong></td><td>The numbers from the project. <strong>Empty</strong> if the project has none or no longer exists.</td></tr><tr><td><strong>Description</strong></td><td>The activity</td></tr></tbody></table></div>
 <p>Two things that ruin a table unnoticed and are therefore fixed here:</p>
@@ -765,18 +789,40 @@ Projektzeit 10:00 – 12:00                     12:00 – 17:00</code></pre>
       <li><strong>With a byte order mark at the start.</strong> Descriptions contain umlauts; without the mark Excel reads the file as Latin-1 and every <code>ä</code> becomes <code>Ã¤</code>.</li>
     </ul>
 <p>If a description contains a semicolon or a quotation mark, that is put into quotation marks correctly. You do not have to prepare anything.</p>
+<h3 id="abschnitt-consolidated-or-raw">Consolidated or raw</h3>
+<p>The default profile exports <strong>consolidated</strong> (<code>kind: &quot;range&quot;</code>). That means: one moment, one project.</p>
+<div class="tablewrap"><table><thead><tr><th>What</th><th>How</th></tr></thead><tbody><tr><td><strong>A break</strong></td><td>Is <strong>not</strong> in the file. A break is not a project, it is the absence of one.</td></tr><tr><td><strong>Work with a break inside it</strong></td><td>Comes out in two pieces. 09:00–12:00 with a break from 10:00 to 10:30 becomes 09:00–10:00 and 10:30–12:00.</td></tr><tr><td><strong>Two entries that overlap</strong></td><td>The <strong>shorter</strong> keeps its time, the longer one is cut around it. Both appear.</td></tr><tr><td><strong>Your calendar entries</strong></td><td>Are <strong>not</strong> changed. Consolidation happens in the file only.</td></tr></tbody></table></div>
+<p>If you want the booked times with the breaks standing, that is a profile of your own with <code>kind: &quot;raw&quot;</code> — the same data, only not merged. You can export both on one day; it is the same set of entries, two views.</p>
+<p><strong>Why the shorter one wins.</strong> Picture a hand-written entry covering the whole day — a seminar, a holiday, a site visit — and three tracked client hours inside it. If the longer entry won, those three hours would be gone from the file. So the shorter one wins, and the day comes out as two pieces with the hour sitting between them.</p>
 <h3 id="abschnitt-own-profiles">Own profiles</h3>
-<p><strong>Settings › Export profiles › New profile.</strong> A profile defines:</p>
-<ul>
-      <li><strong>which columns</strong> — Date, From, To, Duration, Project, Project-Id, Sub-Id, Description, Location</li>
-      <li><strong>in which order</strong> — arrow up and arrow down</li>
-      <li><strong>in which format</strong> — CSV or iCalendar</li>
-    </ul>
-<p>Available columns: <code>Date</code>, <code>From</code>, <code>To</code>, <code>Duration</code>, <code>Project</code>, <code>Project-Id</code>, <code>Sub-Id</code>, <code>Description</code>, <code>Location</code>.</p>
-<p>With <strong>iCalendar</strong> there are no columns: the format has a fixed shape. The columns are kept and are there again when you switch back.</p>
-<p><strong>The column headings follow the app language.</strong> On a German device the default profile writes <code>Tag;Von;Bis;…</code>, on an English one <code>Date;From;To;…</code>. If your bookkeeping needs fixed English headings, say so — then the headers become part of the profile.</p>
-<h3 id="abschnitt-icalendar">iCalendar</h3>
-<p>A profile in the iCalendar format produces a <code>.ics</code> file that other calendar apps can read. The abbreviation stands in the title of the event, the location code at the location, and every event ID is stable — a re-imported, updated certificate therefore updates the events instead of duplicating them.</p>
+<p>Profiles <strong>no longer exist in the app</strong>. They come from a <strong>JSON file</strong> that you <strong>paste</strong> or <strong>choose</strong> in the export screen — at the bottom of the screen, below the export button.</p>
+<p>Two ways, because there are two situations: the file sits on your Mac or in a mail, and then you copy the text and paste it in. Or it sits on the device, and then you choose it and iOS opens its file picker.</p>
+<p><strong>The same </strong><code>id</code> replaces an existing profile. That is the only way to correct something: import the same file again, with the same <code>id</code> and a corrected <code>export</code>. Nothing else is ever removed.</p>
+<p>Zebu tells you what it did. A column it does not understand is <strong>dropped and reported</strong> — the rest of the profile still arrives. And Zebu does not stay quiet when it cannot read a file at all; that is the difference between &quot;broken file&quot; and &quot;nothing imported&quot;.</p>
+<p><strong>With the built-in profile the headings follow the app language</strong> — on a German device <code>Tag;Von;Bis;…</code>, on an English one <code>Date;From;To;…</code>. In an imported profile the headings are <strong>yours</strong>, exactly as in the file.</p>
+<h3 id="abschnitt-how-do-i-write-an-export-file">How do I write an export file</h3>
+<p>A file is a JSON object with four details and a list of columns.</p>
+<pre><code>{
+  &quot;id&quot;: &quot;steuerung-2026&quot;,
+  &quot;name&quot;: &quot;Steuerung 2026&quot;,
+  &quot;format&quot;: &quot;csv&quot;,
+  &quot;kind&quot;: &quot;range&quot;,
+  &quot;fields&quot;: [
+    { &quot;export&quot;: &quot;Date&quot;, &quot;from&quot;: &quot;date&quot; },
+    { &quot;export&quot;: &quot;From&quot;, &quot;from&quot;: &quot;from&quot; }
+  ]
+}</code></pre>
+<div class="tablewrap"><table><thead><tr><th>Detail</th><th>Meaning</th></tr></thead><tbody><tr><td><code>id</code></td><td>Unique. The same <code>id</code> on a second import means replace.</td></tr><tr><td><code>name</code></td><td>What stands in the profile list.</td></tr><tr><td><code>format</code></td><td><code>csv</code>, <code>json</code> or <code>xml</code>.</td></tr><tr><td><code>kind</code></td><td><code>range</code> (consolidated) or <code>raw</code> (as booked). Missing means <code>range</code>.</td></tr></tbody></table></div>
+<p><strong>The internal field names are English</strong> — that is the one part of the file Zebu does not translate:</p>
+<div class="tablewrap"><table><thead><tr><th><code>from</code></th><th>Content</th></tr></thead><tbody><tr><td><code>date</code></td><td>The day, as <code>YYYY-MM-DD</code></td></tr><tr><td><code>from</code> / <code>to</code></td><td>Start and end, as <code>HH:mm</code></td></tr><tr><td><code>project</code></td><td>The project name, e.g. <code>Client A</code></td></tr><tr><td><code>projectId</code> / <code>subId</code></td><td>The numbers from the project, <strong>empty</strong> if there are none</td></tr><tr><td><code>description</code></td><td>The activity</td></tr><tr><td><code>location</code></td><td>The location code, e.g. <code>HST3</code></td></tr></tbody></table></div>
+<p><strong>A column</strong> knows these details:</p>
+<div class="tablewrap"><table><thead><tr><th>Detail</th><th>Meaning</th></tr></thead><tbody><tr><td><code>export</code></td><td>The heading in the file. Without it Zebu uses the app language.</td></tr><tr><td><code>from</code></td><td>One field name, or several as a list.</td></tr><tr><td><code>concat</code></td><td>Only with a list: the separator. <code>&quot;-&quot;</code> turns <code>123</code> and <code>7</code> into <code>123-7</code>.</td></tr><tr><td><code>delta</code></td><td>Only with a list of <strong>two</strong> fields: the difference of the two times.</td></tr><tr><td><code>format</code></td><td>The output pattern. Only on date, time and <code>delta</code> columns.</td></tr><tr><td><code>fixed</code></td><td>A fixed value for this column. No source.</td></tr></tbody></table></div>
+<p><strong>Two kinds of combination.</strong> <code>concat</code> joins text, <code>delta</code> calculates. <code>delta</code> over <code>from</code> and <code>to</code> is the duration — 11:00 to 12:30 is 1.5 hours with <code>&quot;format&quot;: &quot;H,h&quot;</code>. There is <strong>no field</strong> <code>duration</code> <strong>of its own</strong>; <code>delta</code> is there because it can write the same number as <code>1:30</code> and as a decimal the spreadsheet can add up.</p>
+<p><strong>The output pattern</strong> is a list of characters. Anything that is not in the table below stays literal.</p>
+<div class="tablewrap"><table><thead><tr><th>Pattern</th><th>Gives</th><th></th></tr></thead><tbody><tr><td><code>YYYY</code> / <code>YY</code></td><td><code>2026</code> / <code>26</code></td><td>Year</td></tr><tr><td><code>MM</code> / <code>M</code></td><td><code>10</code> / <code>10</code></td><td>Month</td></tr><tr><td><code>DD</code> / <code>D</code></td><td><code>01</code> / <code>1</code></td><td>Day</td></tr><tr><td><code>HH</code> / <code>H</code></td><td><code>09</code> / <code>9</code></td><td>Hour</td></tr><tr><td><code>mm</code> / <code>m</code></td><td><code>30</code> / <code>30</code></td><td>Minute</td></tr><tr><td><code>H:mm</code></td><td><code>1:30</code></td><td>Default for <code>delta</code></td></tr><tr><td><code>H,h</code></td><td><code>1,5</code></td><td>Decimal hours — addable in the spreadsheet</td></tr><tr><td><code>YYYY-MM-DD</code></td><td><code>2026-10-01</code></td><td>Default for <code>date</code></td></tr><tr><td><code>MM/DD/YY</code></td><td><code>10/01/26</code></td><td>For American bookkeeping</td></tr><tr><td><code>DD.MM.YYYY</code></td><td><code>01.10.2026</code></td><td></td></tr></tbody></table></div>
+<p><strong>The comma belongs to the pattern.</strong> With <code>H,h</code> Zebu writes <code>1,5</code>; with <code>H.h</code> it writes <code>1.5</code>. The comma is an ordinary character in the pattern — which is why both work.</p>
+<p>Without <code>format</code>, <code>H:mm</code> applies to <code>delta</code>, <code>HH:mm</code> to <code>from</code> and <code>to</code>, and <code>YYYY-MM-DD</code> to <code>date</code>.</p>
+<p>A complete example of every possibility is in the repository as <code>docs/export-profile.example.json</code>. Two more sit beside it: one that shows only the simple fields, and one with every feature.</p>
 <h3 id="abschnitt-what-gets-exported">What gets exported</h3>
 <p><strong>All events in the chosen period</strong>, however far back. Zebu asks the calendar for exactly this period.</p>
 <p>If a timer is running, it ends at &quot;now&quot; in the file — there is no more to be known about a running time.</p>
@@ -845,8 +891,9 @@ Projektzeit 10:00 – 12:00                     12:00 – 17:00</code></pre>
         <li class="stufe-2"><a href="#abschnitt-7-exportación">7. Exportación</a></li>
         <li class="stufe-3"><a href="#abschnitt-el-periodo">El periodo</a></li>
         <li class="stufe-3"><a href="#abschnitt-el-perfil-predeterminado">El perfil predeterminado</a></li>
+        <li class="stufe-3"><a href="#abschnitt-consolidado-o-en-bruto">Consolidado o en bruto</a></li>
         <li class="stufe-3"><a href="#abschnitt-perfiles-propios">Perfiles propios</a></li>
-        <li class="stufe-3"><a href="#abschnitt-icalendar">iCalendar</a></li>
+        <li class="stufe-3"><a href="#abschnitt-cómo-escribo-un-archivo-de-exportación">Cómo escribo un archivo de exportación</a></li>
         <li class="stufe-3"><a href="#abschnitt-qué-se-exporta">Qué se exporta</a></li>
         <li class="stufe-2"><a href="#abschnitt-8-si-algo-no-funciona">8. Si algo no funciona</a></li>
         <li class="stufe-2"><a href="#abschnitt-9-lo-que-zebu-no-hace-a-propósito">9. Lo que Zebu no hace a propósito</a></li>
@@ -1035,27 +1082,49 @@ Projektzeit 10:00 – 12:00                     12:00 – 17:00</code></pre>
     </ul>
 <p>La cifra del botón cuenta <strong>solo ese periodo</strong>: no es una estimación. Mientras esté sin contar, ahí pone sencillamente <strong>«Exportar»</strong>. Una cifra que Zebu no conoce no es una cifra.</p>
 <h3 id="abschnitt-el-perfil-predeterminado">El perfil predeterminado</h3>
-<p><code>Default (CSV)</code> — <code>Tag;Von;Bis;Projekt-Id;Sub-Id;Beschreibung</code></p>
-<p><strong>No se puede eliminar</strong>: es el único perfil de una instalación nueva, y sin él la pestaña de exportación quedaría vacía.</p>
-<div class="tablewrap"><table><thead><tr><th>Columna</th><th>Contenido</th></tr></thead><tbody><tr><td><strong>Tag</strong></td><td><code>2026-10-01</code></td></tr><tr><td><strong>Von</strong> / <strong>Bis</strong></td><td><code>09:00</code> / <code>11:00</code> en tu zona horaria</td></tr><tr><td><strong>Projekt-Id</strong> / <strong>Sub-Id</strong></td><td>Los números del proyecto. <strong>Vacío</strong> si el proyecto no tiene o ya no existe.</td></tr><tr><td><strong>Beschreibung</strong></td><td>La actividad</td></tr></tbody></table></div>
+<p><code>Default</code> — <code>Fecha;Desde;Hasta;Id-Proyecto;Id-Sub;Descripción</code>, como CSV.</p>
+<p><strong>No se puede borrar</strong>: es el único perfil de una instalación nueva, y sin él la pestaña de exportación estaría vacía.</p>
+<div class="tablewrap"><table><thead><tr><th>Columna</th><th>Contenido</th></tr></thead><tbody><tr><td><strong>Fecha</strong></td><td><code>2026-10-01</code></td></tr><tr><td><strong>Desde</strong> / <strong>Hasta</strong></td><td><code>09:00</code> / <code>11:00</code> en tu huso horario</td></tr><tr><td><strong>Id-Proyecto</strong> / <strong>Id-Sub</strong></td><td>Los números del proyecto. <strong>Vacío</strong> si el proyecto no tiene o ya no existe.</td></tr><tr><td><strong>Descripción</strong></td><td>La actividad</td></tr></tbody></table></div>
 <p>Dos cosas que arruinan una tabla sin que se note, y por eso quedan fijadas aquí:</p>
 <ul>
-      <li><strong>Separado por punto y coma.</strong> Es lo que espera Excel en un entorno alemán. Un archivo separado por comas acaba ahí como *una* columna llena de disparates.</li>
-      <li><strong>Con byte order mark al principio.</strong> Las descripciones llevan diéresis; sin esa marca Excel lee el archivo como Latin-1 y cada <code>ä</code> se convierte en <code>Ã¤</code>.</li>
+      <li><strong>Separado con punto y coma.</strong> Eso es lo que Excel espera en un entorno alemán. Un archivo separado por comas cae allí como *una* columna llena de disparate.</li>
+      <li><strong>Con marca de orden de bytes al principio.</strong> Las descripciones llevan acentos; sin la marca Excel lee el archivo como Latin-1 y cada <code>ä</code> se convierte en <code>Ã¤</code>.</li>
     </ul>
-<p>Si una descripción contiene un punto y coma o una comilla, se entrecomilla correctamente. No tienes que preparar nada.</p>
+<p>Si una descripción contiene punto y coma o comillas, se entrecomilla correctamente. No tienes que preparar nada.</p>
+<h3 id="abschnitt-consolidado-o-en-bruto">Consolidado o en bruto</h3>
+<p>El perfil predeterminado exporta <strong>consolidado</strong> (<code>kind: &quot;range&quot;</code>). Es decir: un momento, un proyecto.</p>
+<div class="tablewrap"><table><thead><tr><th>Qué pasa</th><th>Cómo</th></tr></thead><tbody><tr><td><strong>Una pausa</strong></td><td><strong>No</strong> aparece en el archivo. Una pausa no es un proyecto, es la ausencia de uno.</td></tr><tr><td><strong>Trabajo con una pausa dentro</strong></td><td>Sale en dos trozos. 09:00–12:00 con una pausa de 10:00 a 10:30 se convierte en 09:00–10:00 y 10:30–12:00.</td></tr><tr><td><strong>Dos entradas que se solapan</strong></td><td>La <strong>más corta</strong> conserva su tiempo, la más larga se recorta a su alrededor. Ambas aparecen.</td></tr><tr><td><strong>Tus datos del calendario</strong></td><td><strong>No</strong> se modifican. La consolidación ocurre solo en el archivo.</td></tr></tbody></table></div>
+<p>Si quieres los tiempos reservados con las pausas en pie, eso es un perfil propio con <code>kind: &quot;raw&quot;</code> — los mismos datos, solo sin combinar. Puedes exportar los dos el mismo día; es el mismo conjunto de entradas, dos vistas.</p>
+<p><strong>Por qué gana la más corta.</strong> Imagina una entrada escrita a mano para todo el día — un seminario, unas vacaciones, una obra — y tres horas de cliente registradas dentro. Si ganara la más larga, esas tres horas desaparecerían del archivo. Gana la más corta, y el día sale en dos trozos con la hora en medio.</p>
 <h3 id="abschnitt-perfiles-propios">Perfiles propios</h3>
-<p><strong>Ajustes › Perfiles de exportación › Nuevo perfil.</strong> Un perfil fija:</p>
-<ul>
-      <li><strong>qué columnas</strong>: Tag, Von, Bis, Dauer, Projekt, Projekt-Id, Sub-Id, Beschreibung, Ort</li>
-      <li><strong>en qué orden</strong>, con la flecha arriba y abajo</li>
-      <li><strong>en qué formato</strong>, CSV o iCalendar</li>
-    </ul>
-<p>Columnas disponibles: <code>Tag</code>, <code>Von</code>, <code>Bis</code>, <code>Dauer</code>, <code>Projekt</code>, <code>Projekt-Id</code>, <code>Sub-Id</code>, <code>Beschreibung</code>, <code>Ort</code>.</p>
-<p>Con <strong>iCalendar</strong> no hay columnas: el formato tiene una forma fija. Las columnas se conservan y vuelven a estar ahí cuando cambias de vuelta.</p>
-<p><strong>Los encabezados de columna siguen el idioma de la app.</strong> En un dispositivo alemán, el perfil predeterminado escribe <code>Tag;Von;Bis;…</code>; en uno inglés, <code>Date;From;To;…</code>. Si tu contabilidad necesita encabezados fijos en inglés, dilo: entonces las cabeceras pasan a formar parte del perfil.</p>
-<h3 id="abschnitt-icalendar">iCalendar</h3>
-<p>Un perfil en formato iCalendar genera un archivo <code>.ics</code> que leen otras apps de calendario. La abreviatura va en el título del evento, el código del lugar en el campo de ubicación, y cada ID de evento es estable: es decir, un certificado reimportado y actualizado actualiza los eventos en vez de duplicarlos.</p>
+<p>Los perfiles <strong>ya no se crean en la app</strong>. Vienen de un archivo <strong>JSON</strong> que <strong>pegas</strong> o <strong>eliges</strong> en la pantalla de exportación — abajo del todo, debajo del botón de exportar.</p>
+<p>Dos caminos, porque hay dos situaciones: el archivo está en tu Mac o en un correo, y entonces copias el texto y lo pegas. O está en el dispositivo, y entonces lo eliges y iOS abre su selector de archivos.</p>
+<p><strong>El mismo </strong><code>id</code> sustituye un perfil existente. Es la única forma de corregir algo: importar otra vez el mismo archivo, con el mismo <code>id</code> y un <code>export</code> corregido. Nada más se elimina nunca.</p>
+<p>Zebu te dice lo que ha hecho. Una columna que no entiende se <strong>descarta y se informa</strong> — el resto del perfil llega igual. Y Zebu no se calla cuando no puede leer un archivo; esa es la diferencia entre «archivo roto» y «no se importó nada».</p>
+<p><strong>Con el perfil integrado los títulos siguen el idioma de la app</strong> — en un dispositivo alemán <code>Tag;Von;Bis;…</code>, en uno inglés <code>Date;From;To;…</code>. En un perfil importado los títulos son <strong>tuyos</strong>, tal cual están en el archivo.</p>
+<h3 id="abschnitt-cómo-escribo-un-archivo-de-exportación">Cómo escribo un archivo de exportación</h3>
+<p>Un archivo es un objeto JSON con cuatro datos y una lista de columnas.</p>
+<pre><code>{
+  &quot;id&quot;: &quot;steuerung-2026&quot;,
+  &quot;name&quot;: &quot;Steuerung 2026&quot;,
+  &quot;format&quot;: &quot;csv&quot;,
+  &quot;kind&quot;: &quot;range&quot;,
+  &quot;fields&quot;: [
+    { &quot;export&quot;: &quot;Fecha&quot;, &quot;from&quot;: &quot;date&quot; },
+    { &quot;export&quot;: &quot;Desde&quot;, &quot;from&quot;: &quot;from&quot; }
+  ]
+}</code></pre>
+<div class="tablewrap"><table><thead><tr><th>Dato</th><th>Significado</th></tr></thead><tbody><tr><td><code>id</code></td><td>Único. El mismo <code>id</code> en un segundo importe significa sustituir.</td></tr><tr><td><code>name</code></td><td>Lo que aparece en la lista de perfiles.</td></tr><tr><td><code>format</code></td><td><code>csv</code>, <code>json</code> o <code>xml</code>.</td></tr><tr><td><code>kind</code></td><td><code>range</code> (consolidado) o <code>raw</code> (tal como está reservado). Si falta, vale <code>range</code>.</td></tr></tbody></table></div>
+<p><strong>Los nombres de campo internos están en inglés</strong> — esa es la parte del archivo que Zebu no traduce:</p>
+<div class="tablewrap"><table><thead><tr><th><code>from</code></th><th>Contenido</th></tr></thead><tbody><tr><td><code>date</code></td><td>El día, como <code>YYYY-MM-DD</code></td></tr><tr><td><code>from</code> / <code>to</code></td><td>Inicio y fin, como <code>HH:mm</code></td></tr><tr><td><code>project</code></td><td>El nombre del proyecto, p. ej. <code>Cliente A</code></td></tr><tr><td><code>projectId</code> / <code>subId</code></td><td>Los números del proyecto, <strong>vacío</strong> si no los hay</td></tr><tr><td><code>description</code></td><td>La actividad</td></tr><tr><td><code>location</code></td><td>El código de lugar, p. ej. <code>HST3</code></td></tr></tbody></table></div>
+<p><strong>Una columna</strong> conoce estos datos:</p>
+<div class="tablewrap"><table><thead><tr><th>Dato</th><th>Significado</th></tr></thead><tbody><tr><td><code>export</code></td><td>El título en el archivo. Sin él, Zebu usa el idioma de la app.</td></tr><tr><td><code>from</code></td><td>Un nombre de campo, o varios en una lista.</td></tr><tr><td><code>concat</code></td><td>Solo con una lista: el separador. <code>&quot;-&quot;</code> convierte <code>123</code> y <code>7</code> en <code>123-7</code>.</td></tr><tr><td><code>delta</code></td><td>Solo con una lista de <strong>dos</strong> campos: la diferencia de las dos horas.</td></tr><tr><td><code>format</code></td><td>El patrón de salida. Solo en columnas de fecha, hora y <code>delta</code>.</td></tr><tr><td><code>fixed</code></td><td>Un valor fijo para esta columna. Sin origen.</td></tr></tbody></table></div>
+<p><strong>Dos clases de combinación.</strong> <code>concat</code> une texto, <code>delta</code> calcula. <code>delta</code> sobre <code>from</code> y <code>to</code> es la duración — de 11:00 a 12:30 son 1,5 horas con <code>&quot;format&quot;: &quot;H,h&quot;</code>. No hay un campo <code>duration</code> propio; <code>delta</code> está ahí porque puede escribir el mismo número como <code>1:30</code> y como decimal que la hoja de cálculo puede sumar.</p>
+<p><strong>El patrón de salida</strong> es una lista de caracteres. Todo lo que no esté en la tabla siguiente se queda literal.</p>
+<div class="tablewrap"><table><thead><tr><th>Patrón</th><th>Da</th><th></th></tr></thead><tbody><tr><td><code>YYYY</code> / <code>YY</code></td><td><code>2026</code> / <code>26</code></td><td>Año</td></tr><tr><td><code>MM</code> / <code>M</code></td><td><code>10</code> / <code>10</code></td><td>Mes</td></tr><tr><td><code>DD</code> / <code>D</code></td><td><code>01</code> / <code>1</code></td><td>Día</td></tr><tr><td><code>HH</code> / <code>H</code></td><td><code>09</code> / <code>9</code></td><td>Hora</td></tr><tr><td><code>mm</code> / <code>m</code></td><td><code>30</code> / <code>30</code></td><td>Minuto</td></tr><tr><td><code>H:mm</code></td><td><code>1:30</code></td><td>Valor por defecto para <code>delta</code></td></tr><tr><td><code>H,h</code></td><td><code>1,5</code></td><td>Horas decimales — sumables en la hoja</td></tr><tr><td><code>YYYY-MM-DD</code></td><td><code>2026-10-01</code></td><td>Valor por defecto para <code>date</code></td></tr><tr><td><code>MM/DD/YY</code></td><td><code>10/01/26</code></td><td>Para una contabilidad estadounidense</td></tr><tr><td><code>DD.MM.YYYY</code></td><td><code>01.10.2026</code></td><td></td></tr></tbody></table></div>
+<p><strong>La coma pertenece al patrón.</strong> Con <code>H,h</code> Zebu escribe <code>1,5</code>; con <code>H.h</code> escribe <code>1.5</code>. La coma es un carácter corriente en el patrón — por eso funcionan ambos.</p>
+<p>Sin <code>format</code> rige <code>H:mm</code> para <code>delta</code>, <code>HH:mm</code> para <code>from</code> y <code>to</code>, y <code>YYYY-MM-DD</code> para <code>date</code>.</p>
+<p>Un ejemplo completo de todas las posibilidades está en el repositorio como <code>docs/export-profile.example.json</code>. Junto a él hay dos más: uno que muestra solo los campos sencillos y uno con todas las funciones.</p>
 <h3 id="abschnitt-qué-se-exporta">Qué se exporta</h3>
 <p><strong>Todos los eventos del periodo elegido</strong>, por lejos que esté. Zebu consulta al calendario exactamente por ese periodo.</p>
 <p>Si hay un temporizador en marcha, en el archivo acaba en «ahora»: de un tiempo que corre no se puede saber más.</p>
