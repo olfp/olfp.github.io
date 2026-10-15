@@ -268,6 +268,8 @@
         <li class="stufe-3"><a href="#abschnitt-wenn-die-uhr-schon-lief">Wenn die Uhr schon lief</a></li>
         <li class="stufe-3"><a href="#abschnitt-zeit-von-hand-eintragen">Zeit von Hand eintragen</a></li>
         <li class="stufe-2"><a href="#abschnitt-3-einträge-ansehen-und-ändern">3. Einträge ansehen und ändern</a></li>
+        <li class="stufe-3"><a href="#abschnitt-ein-tag-oder-viele">Ein Tag, oder viele</a></li>
+        <li class="stufe-3"><a href="#abschnitt-einen-eintrag-ändern">Einen Eintrag ändern</a></li>
         <li class="stufe-3"><a href="#abschnitt-der-kalender-ist-die-wahrheit">Der Kalender ist die Wahrheit</a></li>
         <li class="stufe-2"><a href="#abschnitt-4-das-zeitraster">4. Das Zeitraster</a></li>
         <li class="stufe-2"><a href="#abschnitt-5-anwesenheit">5. Anwesenheit</a></li>
@@ -282,6 +284,8 @@
         <li class="stufe-2"><a href="#abschnitt-6-einstellungen">6. Einstellungen</a></li>
         <li class="stufe-3"><a href="#abschnitt-projekte">Projekte</a></li>
         <li class="stufe-3"><a href="#abschnitt-orte">Orte</a></li>
+        <li class="stufe-3"><a href="#abschnitt-pausenrecht">Pausenrecht</a></li>
+        <li class="stufe-3"><a href="#abschnitt-eine-datei-importieren">Eine Datei importieren</a></li>
         <li class="stufe-3"><a href="#abschnitt-löschen-per-wischen">Löschen per Wischen</a></li>
         <li class="stufe-3"><a href="#abschnitt-der-standortzugriff-entzogen">Der Standortzugriff, entzogen</a></li>
         <li class="stufe-2"><a href="#abschnitt-7-export">7. Export</a></li>
@@ -344,23 +348,34 @@
     </ul>
 <p>Auf der Startseite ist es <strong>nicht</strong> in der Projektliste — ein <strong>Start</strong>-Knopf auf „Pause&quot; wäre ein Timer ohne Ende. Auch bei der Auswahl des Projekts für einen Arbeitsort erscheint es nicht: Anwesenheit ist ein Ort, keine Pause.</p>
 <h4 id="abschnitt-pausen-die-zebu-selbst-einträgt">Pausen, die Zebu selbst einträgt</h4>
-<p>Hat ein <strong>beendeter</strong> Tag mehr als <strong>6 Stunden</strong> Arbeit ohne jede Pause, trägt Zebu <strong>30 Minuten</strong> ein. Ab <strong>9 Stunden</strong> sind es <strong>45 Minuten</strong>. Das ist die deutsche Regel, und sie zählt <strong>Arbeitszeit</strong> — Pausen zählen nicht mit.</p>
-<p>Vier Dinge, die diese Regel bewusst einschränken:</p>
+<p>Mehr als <strong>6 Stunden</strong> Arbeit an einem Tag schulden <strong>30 Minuten</strong> Pause, ab <strong>9 Stunden</strong> sind es <strong>45</strong>. Das ist die deutsche Regel (§ 4 ArbZG), und sie zählt <strong>Arbeitszeit</strong> — Pausen zählen nicht mit. Kurze Lücken zwischen zwei Zeiten zählen als Pause, wenn sie mindestens <strong>15 Minuten</strong> lang sind.</p>
+<p><strong>Heute siehst du, was fehlt; beendete Tage holt Zebu nach.</strong></p>
 <ul>
-      <li><strong>Nur für beendete Tage.</strong> Für heute bist du selbst zuständig, mit der Kachel.</li>
-      <li><strong>Nur in eine freie Lücke.</strong> Passt in deinem Tag nirgends eine Pause, liegt sie <strong>hinter der Arbeit</strong> statt über einem Eintrag. Überschneidungen sind unter allen Umständen ausgeschlossen, und eine automatische Funktion ist genau die, die sie heimlich brechen würde.</li>
+      <li>Steht an einem Tag noch eine Pause aus, sagt es die Seite <strong>Einträge</strong> über der Liste: „45 Min Pause fehlen noch&quot;. <strong>Ein Tipp darauf bucht sie.</strong> Wann sie liegt, wählst du nicht — Zebu nimmt die nächstgelegene freie Zeit ab dem <strong>Pausenzeitpunkt</strong> aus den Einstellungen.</li>
+      <li>Bei einem <strong>beendeten</strong> Tag trägt Zebu sie beim nächsten Start selbst ein und sagt es dir. Für heute bist du selbst zuständig: mit der Kachel unter der Projektliste oder mit einem Tipp auf die Zeile.</li>
+      <li><strong>Nur in eine freie Lücke.</strong> Eine Pause kommt ausschließlich in die Anwesenheit, die kein Timer und keine andere Pause schon beansprucht. Passt sie nirgends hin, <strong>trägt Zebu sie nicht ein</strong> — sie müsste sonst in eine laufende Zeit fallen, und das wäre ein Abzug von deiner Zeit. An dem Tag steht dann „Achtung: 45 Min Pause können nicht eingefügt werden!&quot;. Diese Zeile lässt sich <strong>nicht</strong> antippen; es gibt nichts zu tippen. Im Export wird so ein Tag als <code>WARNING</code>-Zeile geführt.</li>
       <li><strong>Einmal pro Start</strong>, nicht bei jedem Nachladen.</li>
-      <li><strong>Zebu sagt es.</strong> Steht beim nächsten Öffnen eine Notiz: welcher Tag, wie lange.</li>
     </ul>
-<blockquote><p>Ein bestehender Tag lässt sich nicht mehr nachträglich in eine Pause zerlegen. Eine automatisch eingetragene Pause ist ein <strong>eigener</strong> Eintrag, kein Abzug vom vorhandenen.</p></blockquote>
+<blockquote><p>Eine nachgetragene Pause ist ein <strong>eigener</strong> Eintrag, kein Abzug vom vorhandenen. Ein Tag, der schon erfasst ist, lässt sich nicht nachträglich in eine Pause zerlegen.</p></blockquote>
+<p>Im <strong>Ausland</strong> schaltest du die ganze Regel mit <strong>„Deutsches Pausenrecht beachten&quot;</strong> in den Einstellungen ab. Dann erfasst Zebu nur noch, was du ihm sagst.</p>
 <h3 id="abschnitt-wenn-die-uhr-schon-lief">Wenn die Uhr schon lief</h3>
 <p>Hast du Zebu geschlossen, während die Uhr lief, oder das Gerät neu gestartet, dann sagt Zebu beim Starten oben einen Hinweis. Die Zeit lief die ganze Zeit weiter — du kannst sie stoppen oder verwerfen.</p>
 <h3 id="abschnitt-zeit-von-hand-eintragen">Zeit von Hand eintragen</h3>
 <p><strong>Einträge</strong> → <strong>Zeit erfassen</strong>. Beginn und Ende eingeben, Projekt und Tätigkeit wählen, speichern. Zebu rundet beide Zeiten auf das Raster an (siehe unten).</p>
 <hr />
 <h2 id="abschnitt-3-einträge-ansehen-und-ändern">3. Einträge ansehen und ändern</h2>
-<p>Die Seite <strong>Einträge</strong> zeigt deine Zeiten nach Tagen gruppiert, mit der Tagessumme. Tippe einen Eintrag an, um ihn zu ändern.</p>
-<p>Dabei kannst du auch <strong>Tätigkeit</strong>, <strong>Projekt</strong> und beide Zeiten korrigieren. Löschen fragt immer erst nach.</p>
+<p>Die Seite <strong>Einträge</strong> öffnet bei <strong>heute</strong> — immer, auch wenn heute noch leer ist. Sie springt nicht von selbst auf den letzten Tag mit Einträgen. Ein leerer Tag sagt selbst, dass dort <strong>keine abgeschlossene Zeit</strong> liegt; der Unterschied zwischen „nichts erfasst&quot; und „läuft gerade&quot; ist genau der, den man sucht.</p>
+<h3 id="abschnitt-ein-tag-oder-viele">Ein Tag, oder viele</h3>
+<p>Oben schaltest du um:</p>
+<div class="tablewrap"><table><thead><tr><th>Ansicht</th><th>Was zu sehen ist</th></tr></thead><tbody><tr><td><strong>Ein Tag</strong></td><td>Der gewählte Tag, mit seiner Summe unter dem Datum.</td></tr><tr><td><strong>Viele</strong></td><td>Derselbe Tag und alles davor, untereinander.</td></tr></tbody></table></div>
+<p>Der gewählte Tag bleibt beim Umschalten derselbe. „Viele&quot; ist eine längere Ansicht von hier aus, kein zweiter Bildschirm mit eigener Idee davon, wo du bist.</p>
+<p>Die <strong>Pfeile</strong> springen nicht zum nächsten Kalendertag, sondern zum nächsten Tag, <strong>an dem etwas steht</strong>. Der Pfeil nach vorn bietet dabei immer <strong>heute</strong> an, auch wenn heute leer ist — sonst stünde man auf gestern und der Knopf behauptete, es gäbe kein Morgen. Der Knopf <strong>Heute</strong> bringt dich von jedem Tag zurück, und ein Tippen auf das <strong>Datum</strong> öffnet die Datumswahl; wählbar ist alles bis heute.</p>
+<p>Zebu lädt die letzten <strong>30 Tage</strong>. Ein Tag weiter zurück ist in der Liste leer, auch wenn im Kalender etwas steht — siehe Kapitel 7 zum Export, der jeden Zeitraum liest.</p>
+<p>Über der Liste steht, was der Tag an Pause schuldet (Kapitel 2).</p>
+<p>Eine noch <strong>laufende</strong> Zeit trägt in ihrer Zeile <strong>LÄUFT</strong> und lässt sich hier nicht bearbeiten. Das ist kein Versehen: eine laufende Zeit ist nichts, was man ändert, sondern etwas, das gerade passiert — beendet wird sie auf der Zeiterfassung. Dasselbe gilt für einen laufenden Besuch: er steht als Zeile da, aber geschrieben wird er erst, wenn du gehst.</p>
+<h3 id="abschnitt-einen-eintrag-ändern">Einen Eintrag ändern</h3>
+<p>Tippe einen Eintrag an. Du kannst <strong>Tätigkeit</strong>, <strong>Projekt</strong> und beide Zeiten korrigieren.</p>
+<p>Löschen ist ein roter Knopf über die volle Breite am Ende des Formulars, und darunter ein Blatt, das dich fragt — ein Löschen ohne Rückfrage gibt es nicht.</p>
 <p>Ein Anwesenheitseintrag (siehe unten) trägt zusätzlich ein Feld <strong>Ort</strong> mit dem Ortscode. Er ist nur lesbar — der Code ist fest mit deiner Ortsliste verknüpft. Die Tätigkeit kannst du auch dort frei schreiben.</p>
 <h3 id="abschnitt-der-kalender-ist-die-wahrheit">Der Kalender ist die Wahrheit</h3>
 <p>Zebu liest dieselben Termine, die in der Kalender-App stehen. Das bedeutet:</p>
@@ -436,22 +451,35 @@ Projektzeit 10:00 – 12:00                     12:00 – 17:00</code></pre>
 <blockquote><p><strong>Wichtig:</strong> Beendest du Zebu aus dem App-Switcher heraus (nach oben wischen), hört iOS auf, Ankünfte zu erkennen, bis du die App wieder öffnest. Das ist iOS-Verhalten und lässt sich nicht umgehen. Das normale Nach-Hintergrund- Gehen ist davon nicht betroffen.</p></blockquote>
 <hr />
 <h2 id="abschnitt-6-einstellungen">6. Einstellungen</h2>
-<div class="tablewrap"><table><thead><tr><th>Bereich</th><th>Was</th></tr></thead><tbody><tr><td><strong>Sprache</strong></td><td>Deutsch, English, Español.</td></tr><tr><td><strong>Kalendername</strong></td><td>Umbenennen. Wirkt sofort in der Kalender-App.</td></tr><tr><td><strong>Projekte</strong></td><td>Die Projektliste. Wird als Klammer im Titel verwendet.</td></tr><tr><td><strong>Zeitraster</strong></td><td>1 / 5 / 15 Minuten. Gilt für neue Einträge.</td></tr><tr><td><strong>Orte</strong></td><td>Arbeitsorte, Standortzugriff, je Ort ein Projekt.</td></tr><tr><td><strong>Exportprofile</strong></td><td>Spalten, Reihenfolge und Format der Exporte.</td></tr></tbody></table></div>
+<div class="tablewrap"><table><thead><tr><th>Bereich</th><th>Was</th></tr></thead><tbody><tr><td><strong>Sprache</strong></td><td>Deutsch, English, Español.</td></tr><tr><td><strong>Erscheinungsbild</strong></td><td>System, Hell, Dunkel. „System&quot; folgt dem Gerät.</td></tr><tr><td><strong>Kalendername</strong></td><td>Umbenennen. Wirkt sofort in der Kalender-App.</td></tr><tr><td><strong>Projekte</strong></td><td>Die Projektliste. Wird als Klammer im Titel verwendet.</td></tr><tr><td><strong>Zeitraster</strong></td><td>1 / 5 / 15 Minuten. Gilt für neue Einträge.</td></tr><tr><td><strong>Pausenrecht</strong></td><td>Die deutsche Pausenregel an- oder abschalten, und wo eine Pause liegen soll.</td></tr><tr><td><strong>Orte</strong></td><td>Arbeitsorte, Standortzugriff, je Ort ein Projekt.</td></tr><tr><td><strong>Eine Datei importieren</strong></td><td>Orte, Projekte oder eine Zeiterfassung aus einer Datei.</td></tr><tr><td><strong>Exportprofile</strong></td><td>Spalten, Reihenfolge und Format der Exporte.</td></tr></tbody></table></div>
 <h3 id="abschnitt-projekte">Projekte</h3>
 <p>Ein Projekt ist ein <strong>Kürzel</strong> (z. B. <code>KUNDE_A</code>), eine Beschreibung und zwei optionale Nummern für den Export:</p>
 <div class="tablewrap"><table><thead><tr><th>Feld</th><th>Für</th></tr></thead><tbody><tr><td><strong>Kürzel</strong></td><td>Die Klammer im Titel. Einziges Pflichtfeld.</td></tr><tr><td><strong>Beschreibung</strong></td><td>Steht auf der Kachel der Startseite. Wird nie in den Kalender geschrieben.</td></tr><tr><td><strong>ID</strong></td><td>Optionale Kennung für den Export, bis zu 10 Zeichen.</td></tr><tr><td><strong>Sub-ID</strong></td><td>Optionale zweite Kennung, bis zu 10 Zeichen.</td></tr><tr><td><strong>Herz</strong></td><td>Heftet das Projekt auf der Startseite nach oben.</td></tr></tbody></table></div>
 <p>Antippen öffnet das Formular für alle Felder. „Neues Projekt&quot; benutzt dasselbe Formular.</p>
-<p>Zwei Dinge, die man wissen sollte:</p>
+<p>Drei Dinge, die man wissen sollte:</p>
 <ul>
       <li><strong>Umbenennen zieht die Orte mit.</strong> Ein Ort, der auf <code>ALT</code> zeigt, zeigt nach dem Umbenennen auf den neuen Namen. <strong>Der Kalender wird dabei nicht umgeschrieben</strong> — bereits erfasste Einträge behalten ihr altes Kürzel. Du kannst sie in der Kalender-App von Apple ändern. Zebu fragt vorher, weil das eine echte Folge ist.</li>
-      <li><strong>Ein verwendetes Projekt lässt sich nicht löschen.</strong> Sonst würde die Anwesenheit dieses Ortes auf ein Kürzel gebucht, das es nicht mehr gibt. Zebu nennt die Orte, um die es geht.</li>
+      <li><strong>Gelöscht wird im Formular.</strong> Dort steht unten ein roter <strong>Löschen</strong>-Knopf über die volle Breite, und darunter fragt Zebu nach. Ein Projekt zu löschen entfernt <strong>keine</strong> Zeit: die bereits erfassten Einträge behalten ihr Kürzel, es gibt danach nur kein Projekt dieses Namens mehr. Deshalb steht es auch in dem Blatt, das dich fragt.</li>
+      <li><strong>Ein verwendetes Projekt lässt sich nicht löschen.</strong> Sonst würde die Anwesenheit dieses Ortes auf ein Kürzel gebucht, das es nicht mehr gibt. Zebu nennt die Orte, um die es geht. Und <strong>„Pause&quot; lässt sich nie löschen</strong>: es gehört Zebu, und Zebu braucht den Namen, um eine Pause als Pause zu erkennen.</li>
     </ul>
 <p>Die <strong>Startseite</strong> sortiert Favoriten zuerst, danach alphabetisch. Die Liste in den Einstellungen bleibt <strong>immer alphabetisch</strong> — ein Herz verschiebt dort nichts, weil die Zeile sonst unter dem Finger wegspringt, der sie gerade angetippt hat.</p>
 <h3 id="abschnitt-orte">Orte</h3>
 <p>Jeder Ort braucht ein <strong>Projekt</strong>; es ist Pflicht, weil die Zeit an diesem Ort dort gebucht wird. Zwei Orte sind zwei verschiedene Arbeiten, und eine globale Einstellung könnte nur für einen von beiden stimmen.</p>
 <p>Nach einem Update zeigt Zebu bei einem bestehenden Ort einmalig <code>&quot;default&quot; gibt es nicht mehr</code> und bittet dich, ein Projekt zu wählen. Das ist richtig und kein Fehler: die frühere Einstellung war ein Freitext und musste nie in deiner Projektliste stehen.</p>
+<h3 id="abschnitt-pausenrecht">Pausenrecht</h3>
+<p>Ganz oben der Schalter <strong>„Deutsches Pausenrecht beachten&quot;</strong>. Aus heißt: Zebu erfasst nur noch, was du ihm sagst — für die Zeit im Ausland. Darunter der <strong>Pausenzeitpunkt</strong>: die Uhrzeit, ab der eine automatische Pause liegen soll, so nah an dieser Zeit, wie der Tag es erlaubt.</p>
+<p>Die Regel selbst steht in Kapitel 2.</p>
+<h3 id="abschnitt-eine-datei-importieren">Eine Datei importieren</h3>
+<p>Zebu liest drei Sorten Datei: <strong>Orte</strong>, <strong>Projekte</strong> und eine <strong>Zeiterfassung</strong>. Du wählst sie über die System-Dateiauswahl oder fügst ihren Inhalt ein.</p>
+<p><strong>Zebu zeigt zuerst, was es ändern würde</strong> — was neu wäre, was ersetzt würde, was gleich bleibt — und schreibt erst, wenn du auf <strong>Übernehmen</strong> tippst. Jede Zeile, die es nicht lesen kann, wird <strong>übersprungen und benannt</strong>; acht gute Orte sind nicht wegen eines neunten ohne Koordinaten verloren.</p>
+<p>Was die einzelnen Sorten sind:</p>
+<div class="tablewrap"><table><thead><tr><th>Datei</th><th>Was passiert</th></tr></thead><tbody><tr><td><strong>Orte</strong></td><td>Ein Ort ohne Projekt und <strong>ohne Erfassung</strong> kommt an; ein Ort, den es schon gibt, behält sein Projekt und sein An/Aus.</td></tr><tr><td><strong>Projekte</strong></td><td>Beschreibung, ID und Sub-ID werden ersetzt, das <strong>Herz</strong> bleibt, wie du es gesetzt hast.</td></tr><tr><td><strong>Zeiterfassung</strong></td><td>Eine Liste von Zeiten wird als <strong>echte Kalendertermine</strong> angelegt — genau die Zeiten aus der Datei, ohne Raster.</td></tr></tbody></table></div>
+<p>Orte und Zeiterfassungen sind <strong>JSON</strong>. Eine Projektliste darf auch <strong>CSV</strong> sein, die Form, die eine Tabellenkalkulation macht: ihre erste Zeile beginnt mit <code>PROJECT</code>, danach dürfen <code>DESCRIPTION</code>, <code>ID</code> und <code>SUBID</code> folgen — jedes davon optional. Getrennt wird mit Komma oder Semikolon; eine Spalte, die Zebu nicht kennt, wird <strong>einmal genannt und übersprungen</strong>, die Datei lädt trotzdem.</p>
+<p><strong>Aus dem Netz kommt nichts.</strong> Der Import geht ausschließlich über eine Datei, die du selbst auswählst oder einfügst — siehe Kapitel 9.</p>
+<p>Beispiele liegen im Projekt unter <code>docs/</code>: <code>import-locations.example.json</code>, <code>import-projects.example.json</code>, <code>import-projects.demo.csv</code> und <code>import-entries.example.json</code>.</p>
 <h3 id="abschnitt-löschen-per-wischen">Löschen per Wischen</h3>
 <p>In der Projekt- und der Ortsliste <strong>nach links wischen</strong>. Es erscheint ein roter Papierkorb. Löschen fragt danach nach — bei einem Ort mit dem Hinweis, dass bereits erfasste Anwesenheit erhalten bleibt.</p>
+<p>Die Zeile <strong>„Pause&quot;</strong> lässt sich gar nicht erst wischen: sie zeigt keinen Papierkorb. Eine Aktion, die immer abgelehnt wird, wäre ein Knopf, der nichts tut — und das ist schlimmer als kein Knopf. In der Projektliste geht es auch ohne Geste: das Formular hat unten denselben roten <strong>Löschen</strong>-Knopf.</p>
 <h3 id="abschnitt-der-standortzugriff-entzogen">Der Standortzugriff, entzogen</h3>
 <p>Schaltest du den Zugriff in den iOS-Einstellungen ab, zeigt Zebu nur noch <strong>einen</strong> Knopf: „iOS-Einstellungen öffnen&quot;. iOS fragt nicht ein zweites Mal — ein Knopf, der trotzdem „erlauben&quot; hieße, würde gar nichts tun, gerade wenn er der hervorgehobene ist.</p>
 <p>Gleiches gilt für den Kalender: Nach einer Ablehnung führt dich nur noch „iOS-Einstellungen öffnen&quot; weiter, unter Datenschutz &amp; Sicherheit › Zebu.</p>
@@ -543,14 +571,14 @@ Projektzeit 10:00 – 12:00                     12:00 – 17:00</code></pre>
 <p><strong>Kein automatisches Raten.</strong> Fehlt eine Endzeit, fragt Zebu nach. Es erfindet lieber keine Zeit, als dir falsche Zeit in die Abrechnung zu schreiben.</p>
 <p><strong>Kein stilles Löschen.</strong> Jedes Löschen — Eintrag, Projekt, Ort, Profil — fragt nach oder braucht eine Geste. Die einzige Ausnahme ist das <strong>Standardprofil</strong>, das sich nicht löschen lässt, weil ein frisches Gerät sonst nichts zu exportieren hätte.</p>
 <p><strong>Keine rückwirkende Umbenennung im Kalender.</strong> Ein Projekt umzubenennen ändert die Orte, die darauf zeigen — aber keine Einträge, die schon im Kalender stehen. Zebu fragt vorher und lässt den Kalender in deiner Hand.</p>
-<p><strong>Kein Import.</strong> Zebu kann exportieren, nicht einlesen. Eine exportierte CSV ist für eine Tabelle gedacht, nicht als Quelle für Zebu.</p>
+<p><strong>Kein Abruf aus dem Netz.</strong> Zebu liest keine Daten, die es sich selbst holt: kein Konto, keine Adresse, die es abfragt, kein Hintergrund-Abgleich mit einem eigenen Dienst. Importieren heißt hier: eine Datei, die <strong>du</strong> auswählst oder einfügst. Der Import war einmal als URL gedacht und ist am 14.10.2026 bewusst auf Dateien umgestellt worden — eine Funktion, die ohne Netz nicht funktioniert, gehört nicht in eine App, die ohne Netz funktionieren soll.</p>
 <p><strong>Keine rückwirkende Änderung.</strong> Ein neues Zeitraster verändert keine bereits erfassten Zeiten.</p>
 <hr />
 <h2 id="abschnitt-ein-hinweis-zur-sorgfalt-mit-der-anwesenheit">Ein Hinweis zur Sorgfalt mit der Anwesenheit</h2>
 <p>Ortserfassung ist Standortverfolgung — wenn auch eine sehr grobe. Sie beantwortet die Frage, *wann* du an einem Ort warst, nicht *was* du dort getan hast. Wenn du dich in einem Betrieb, gegenüber deiner Arbeitgeberin oder deinem Arbeitgeber bewegst, ist es gut zu wissen, dass diese Funktion läuft, bevor du sie einschaltest. Das ist keine Funktionswarnung, sondern eine Frage der Fairness.</p>
 <p>Der Code sollte aussagekräftig sein, weil er in Kalendertiteln und Exporten landet: <code>HST3</code> sagt nichts, <code>KUND_NORD</code> schon.</p>
 <hr />
-<p>*Zebu 1.0 — Anwesenheit und Ortung sind verfügbar, der Export ebenfalls. Ein Import (also das Zurücklesen einer CSV) ist nicht enthalten.*</p>
+<p>*Zebu 0.2.0 — Anwesenheit und Ortung sind verfügbar, der Export ebenfalls. Importieren geht aus einer Datei: Orte, Projekte (auch als CSV) und eine Zeiterfassung. Aus dem Netz holt Zebu nichts.*</p>
       </div>
     </article>
     <article class="manual" id="manual-en" lang="en" data-language="en" hidden>
@@ -570,6 +598,8 @@ Projektzeit 10:00 – 12:00                     12:00 – 17:00</code></pre>
         <li class="stufe-3"><a href="#abschnitt-when-the-clock-was-already-running">When the clock was already running</a></li>
         <li class="stufe-3"><a href="#abschnitt-entering-time-by-hand">Entering time by hand</a></li>
         <li class="stufe-2"><a href="#abschnitt-3-viewing-and-changing-entries">3. Viewing and changing entries</a></li>
+        <li class="stufe-3"><a href="#abschnitt-one-day-or-many">One day, or many</a></li>
+        <li class="stufe-3"><a href="#abschnitt-changing-an-entry">Changing an entry</a></li>
         <li class="stufe-3"><a href="#abschnitt-the-calendar-is-the-truth">The calendar is the truth</a></li>
         <li class="stufe-2"><a href="#abschnitt-4-the-time-grid">4. The time grid</a></li>
         <li class="stufe-2"><a href="#abschnitt-5-attendance">5. Attendance</a></li>
@@ -584,6 +614,8 @@ Projektzeit 10:00 – 12:00                     12:00 – 17:00</code></pre>
         <li class="stufe-2"><a href="#abschnitt-6-settings">6. Settings</a></li>
         <li class="stufe-3"><a href="#abschnitt-projects">Projects</a></li>
         <li class="stufe-3"><a href="#abschnitt-locations">Locations</a></li>
+        <li class="stufe-3"><a href="#abschnitt-break-law">Break law</a></li>
+        <li class="stufe-3"><a href="#abschnitt-import-a-file">Import a file</a></li>
         <li class="stufe-3"><a href="#abschnitt-deleting-by-swiping">Deleting by swiping</a></li>
         <li class="stufe-3"><a href="#abschnitt-location-access-withdrawn">Location access, withdrawn</a></li>
         <li class="stufe-2"><a href="#abschnitt-7-export">7. Export</a></li>
@@ -646,23 +678,34 @@ Projektzeit 10:00 – 12:00                     12:00 – 17:00</code></pre>
     </ul>
 <p>On the start screen it is <strong>not</strong> in the project list — a <strong>Start</strong> button on &quot;Pause&quot; would be a timer without an end. It does not appear when you choose the project for a work location either: attendance is a place, not a break.</p>
 <h4 id="abschnitt-breaks-that-zebu-books-itself">Breaks that Zebu books itself</h4>
-<p>If a <strong>finished</strong> day has more than <strong>6 hours</strong> of work without a single break, Zebu books <strong>30 minutes</strong>. From <strong>9 hours</strong> it is <strong>45 minutes</strong>. That is the German working-hours rule, and it counts <strong>working time</strong> — breaks do not count towards it.</p>
-<p>Four things that deliberately restrict this rule:</p>
+<p>More than <strong>6 hours</strong> of work on a day owe <strong>30 minutes</strong> of break, from <strong>9 hours</strong> it is <strong>45</strong>. That is the German rule (§ 4 ArbZG), and it counts <strong>working time</strong> — breaks do not count towards it. Short gaps between two times count as a break if they are at least <strong>15 minutes</strong> long.</p>
+<p><strong>Today you see what is missing; finished days Zebu catches up.</strong></p>
 <ul>
-      <li><strong>Only for finished days.</strong> For today you are responsible yourself, with the tile.</li>
-      <li><strong>Only into a free gap.</strong> If a break fits nowhere in your day, it lies <strong>after the work</strong> instead of on top of an entry. Overlaps are excluded under all circumstances, and an automatic feature is exactly the one that would quietly break them.</li>
+      <li>If a break is still due on a day, the <strong>Entries</strong> screen says so above the list: &quot;45 min of break still due&quot;. <strong>Tapping it books it.</strong> You do not choose where it lies — Zebu takes the nearest free time from the <strong>Break time</strong> in the settings.</li>
+      <li>For a <strong>finished</strong> day Zebu books it itself on the next launch and tells you. For today you are responsible yourself: with the tile below the project list or with a tap on the row.</li>
+      <li><strong>Only into a free gap.</strong> A break goes exclusively into the attendance that no timer and no other break already claims. If it fits nowhere, <strong>Zebu does not book it</strong> — it would otherwise have to fall into a running time, and that would be a deduction from your time. On that day it then says &quot;Warning: 45 min of break cannot be inserted!&quot;. That line cannot be tapped; there is nothing to tap. In the export such a day is carried as a <code>WARNING</code> line.</li>
       <li><strong>Once per launch</strong>, not on every reload.</li>
-      <li><strong>Zebu says so.</strong> If the next time you open there is a note: which day, for how long.</li>
     </ul>
-<blockquote><p>An existing day cannot be split into a break afterwards. An automatically booked break is an entry of its <strong>own</strong>, not a deduction from the existing one.</p></blockquote>
+<blockquote><p>A break booked after the fact is an entry of its <strong>own</strong>, not a deduction from the existing one. A day that is already recorded cannot be split into a break afterwards.</p></blockquote>
+<p>Abroad you switch the whole rule off in the settings with <strong>&quot;Adhere to German break law&quot;</strong>. Then Zebu records only what you tell it.</p>
 <h3 id="abschnitt-when-the-clock-was-already-running">When the clock was already running</h3>
 <p>If you closed Zebu while the clock was running, or restarted the device, then Zebu says so in a note at the top when it starts. The time ran on all the while — you can stop it or discard it.</p>
 <h3 id="abschnitt-entering-time-by-hand">Entering time by hand</h3>
 <p><strong>Entries</strong> → <strong>Add time</strong>. Enter start and end, choose project and activity, save. Zebu rounds both times to the grid (see below).</p>
 <hr />
 <h2 id="abschnitt-3-viewing-and-changing-entries">3. Viewing and changing entries</h2>
-<p>The <strong>Entries</strong> screen shows your times grouped by day, with the daily total. Tap an entry to change it.</p>
-<p>You can also correct the <strong>activity</strong>, the <strong>project</strong> and both times while you are there. Deleting always asks first.</p>
+<p>The <strong>Entries</strong> screen opens on <strong>today</strong> — always, even when today is still empty. It does not jump to the last day that has entries on its own. An empty day says itself that there is <strong>no completed time</strong> on it; the difference between &quot;nothing recorded&quot; and &quot;running right now&quot; is exactly the one you are looking for.</p>
+<h3 id="abschnitt-one-day-or-many">One day, or many</h3>
+<p>At the top you switch:</p>
+<div class="tablewrap"><table><thead><tr><th>View</th><th>What you see</th></tr></thead><tbody><tr><td><strong>One Day</strong></td><td>The chosen day, with its total under the date.</td></tr><tr><td><strong>Many</strong></td><td>The same day and everything before it, one below the other.</td></tr></tbody></table></div>
+<p>The chosen day stays the same when you switch. &quot;Many&quot; is a longer view from here, not a second screen with its own idea of where you are.</p>
+<p>The <strong>arrows</strong> do not jump to the next calendar day, but to the next day <strong>that has something on it</strong>. The forward arrow always offers <strong>today</strong>, even when today is empty — otherwise you would stand on yesterday and the button would claim there is no tomorrow. The <strong>Today</strong> button takes you back from any day, and tapping the <strong>date</strong> opens the date picker; everything up to today is selectable.</p>
+<p>Zebu loads the last <strong>30 days</strong>. A day further back is empty in the list, even when something stands in the calendar — see chapter 7 for the export, which reads any period.</p>
+<p>Above the list it says what the day owes in break (chapter 2).</p>
+<p>A time still <strong>running</strong> carries <strong>RUNNING</strong> in its row and cannot be edited here. That is no oversight: a running time is not something you change but something that is happening — it is ended on the timer. The same goes for a running visit: it stands there as a row, but it is written only when you leave.</p>
+<h3 id="abschnitt-changing-an-entry">Changing an entry</h3>
+<p>Tap an entry. You can correct the <strong>activity</strong>, the <strong>project</strong> and both times.</p>
+<p>Deleting is a red button across the full width at the end of the form, and below it a sheet that asks you — a deletion without a question does not exist.</p>
 <p>An attendance entry (see below) carries an additional <strong>Location</strong> field with the location code. It is read-only — the code is firmly tied to your list of locations. You can write the activity freely there too.</p>
 <h3 id="abschnitt-the-calendar-is-the-truth">The calendar is the truth</h3>
 <p>Zebu reads the same events that stand in the Calendar app. That means:</p>
@@ -738,22 +781,35 @@ Projektzeit 10:00 – 12:00                     12:00 – 17:00</code></pre>
 <blockquote><p><strong>Important:</strong> if you quit Zebu from the app switcher (swipe up), iOS stops recognizing arrivals until you open the app again. That is iOS behavior and cannot be worked around. The normal leaving in the background is not affected.</p></blockquote>
 <hr />
 <h2 id="abschnitt-6-settings">6. Settings</h2>
-<div class="tablewrap"><table><thead><tr><th>Area</th><th>What</th></tr></thead><tbody><tr><td><strong>Language</strong></td><td>German, English, Español.</td></tr><tr><td><strong>Calendar name</strong></td><td>Rename. Takes effect immediately in the Calendar app.</td></tr><tr><td><strong>Projects</strong></td><td>The project list. Used as the bracket in the title.</td></tr><tr><td><strong>Time grid</strong></td><td>1 / 5 / 15 minutes. Applies to new entries.</td></tr><tr><td><strong>Locations</strong></td><td>Work locations, location access, one project per location.</td></tr><tr><td><strong>Export profiles</strong></td><td>Columns, order and format of the exports.</td></tr></tbody></table></div>
+<div class="tablewrap"><table><thead><tr><th>Area</th><th>What</th></tr></thead><tbody><tr><td><strong>Language</strong></td><td>German, English, Español.</td></tr><tr><td><strong>Appearance</strong></td><td>System, Light, Dark. &quot;System&quot; follows the device.</td></tr><tr><td><strong>Calendar name</strong></td><td>Rename. Takes effect immediately in the Calendar app.</td></tr><tr><td><strong>Projects</strong></td><td>The project list. Used as the bracket in the title.</td></tr><tr><td><strong>Time grid</strong></td><td>1 / 5 / 15 minutes. Applies to new entries.</td></tr><tr><td><strong>Break law</strong></td><td>Switch the German break rule on or off, and where a break should lie.</td></tr><tr><td><strong>Locations</strong></td><td>Work locations, location access, one project per location.</td></tr><tr><td><strong>Import a file</strong></td><td>Locations, projects or a timesheet from a file.</td></tr><tr><td><strong>Export profiles</strong></td><td>Columns, order and format of the exports.</td></tr></tbody></table></div>
 <h3 id="abschnitt-projects">Projects</h3>
 <p>A project is an <strong>abbreviation</strong> (e.g. <code>KUNDE_A</code>), a description and two optional numbers for the export:</p>
 <div class="tablewrap"><table><thead><tr><th>Field</th><th>For</th></tr></thead><tbody><tr><td><strong>Abbreviation</strong></td><td>The bracket in the title. The only mandatory field.</td></tr><tr><td><strong>Description</strong></td><td>Stands on the tile of the start screen. Never written into the calendar.</td></tr><tr><td><strong>ID</strong></td><td>Optional identifier for the export, up to 10 characters.</td></tr><tr><td><strong>Sub-ID</strong></td><td>Optional second identifier, up to 10 characters.</td></tr><tr><td><strong>Heart</strong></td><td>Pins the project to the top of the start screen.</td></tr></tbody></table></div>
 <p>Tapping opens the form for all fields. &quot;New project&quot; uses the same form.</p>
-<p>Two things worth knowing:</p>
+<p>Three things worth knowing:</p>
 <ul>
       <li><strong>Renaming takes the locations along.</strong> A location that points at <code>ALT</code> points at the new name after the rename. <strong>The calendar is not rewritten</strong> — entries already recorded keep their old abbreviation. You can change them in Apple&#39;s Calendar app. Zebu asks beforehand, because that is a real consequence.</li>
-      <li><strong>A project that has been used cannot be deleted.</strong> Otherwise the attendance of that location would be booked on an abbreviation that no longer exists. Zebu names the locations it is about.</li>
+      <li><strong>Deletion happens in the form.</strong> There a red <strong>Delete</strong> button stands at the bottom across the full width, and below it Zebu asks. Deleting a project removes <strong>no</strong> time: the entries already recorded keep their tag, there is afterwards just no project of that name any more. That is why it also stands in the sheet that asks you.</li>
+      <li><strong>A project that has been used cannot be deleted.</strong> Otherwise the attendance of that location would be booked on an abbreviation that no longer exists. Zebu names the locations it is about. And <strong>&quot;Pause&quot; can never be deleted</strong>: it belongs to Zebu, and Zebu needs the name to recognize a break as a break.</li>
     </ul>
 <p>The <strong>start screen</strong> sorts favorites first, then alphabetically. The list in the settings stays <strong>always alphabetical</strong> — a heart moves nothing there, because the row would otherwise jump out from under the finger that just tapped it.</p>
 <h3 id="abschnitt-locations">Locations</h3>
 <p>Every location needs a <strong>project</strong>; it is mandatory because the time at that location is booked there. Two locations are two different jobs, and a global setting could only ever be right for one of the two.</p>
 <p>After an update, Zebu shows once for an existing location <code>&quot;default&quot; no longer exists</code> and asks you to choose a project. That is correct and not an error: the earlier setting was a free text and never had to exist in your project list.</p>
+<h3 id="abschnitt-break-law">Break law</h3>
+<p>At the very top the switch <strong>&quot;Adhere to German break law&quot;</strong>. Off means: Zebu records only what you tell it — for time abroad. Below it the <strong>Break time</strong>: the time from which an automatic break should lie, as close to this time as the day allows.</p>
+<p>The rule itself stands in chapter 2.</p>
+<h3 id="abschnitt-import-a-file">Import a file</h3>
+<p>Zebu reads three kinds of file: <strong>locations</strong>, <strong>projects</strong> and a <strong>timesheet</strong>. You choose them through the system file picker or paste their content.</p>
+<p><strong>Zebu shows you first what it would change</strong> — what would be new, what would be replaced, what stays the same — and writes only when you tap <strong>Apply</strong>. Every line it cannot read is <strong>skipped and named</strong>; eight good locations are not lost because of a ninth without coordinates.</p>
+<p>What the individual kinds are:</p>
+<div class="tablewrap"><table><thead><tr><th>File</th><th>What happens</th></tr></thead><tbody><tr><td><strong>Locations</strong></td><td>A location without a project and <strong>without tracking</strong> arrives; a location that already exists keeps its project and its on/off.</td></tr><tr><td><strong>Projects</strong></td><td>Description, ID and Sub-ID are replaced, the <strong>heart</strong> stays as you set it.</td></tr><tr><td><strong>Timesheet</strong></td><td>A list of times is created as <strong>real calendar events</strong> — exactly the times from the file, without the grid.</td></tr></tbody></table></div>
+<p>Locations and timesheets are <strong>JSON</strong>. A project list may also be <strong>CSV</strong>, the form a spreadsheet makes: its first line starts with <code>PROJECT</code>, after which <code>DESCRIPTION</code>, <code>ID</code> and <code>SUBID</code> may follow — each of them optional. Separation is by comma or semicolon; a column Zebu does not know is <strong>named once and skipped</strong>, the file still loads.</p>
+<p><strong>Nothing comes from the network.</strong> The import goes exclusively through a file that you choose or paste yourself — see chapter 9.</p>
+<p>Examples sit in the repository under <code>docs/</code>: <code>import-locations.example.json</code>, <code>import-projects.example.json</code>, <code>import-projects.demo.csv</code> and <code>import-entries.example.json</code>.</p>
 <h3 id="abschnitt-deleting-by-swiping">Deleting by swiping</h3>
 <p>In the project list and in the location list, <strong>swipe left</strong>. A red bin appears. Deleting then asks — for a location with the note that attendance already recorded is kept.</p>
+<p>The <strong>&quot;Pause&quot;</strong> row cannot be swiped at all: it shows no bin. An action that is always refused would be a button that does nothing — and that is worse than no button. In the project list it also works without a gesture: the form has the same red <strong>Delete</strong> button at the bottom.</p>
 <h3 id="abschnitt-location-access-withdrawn">Location access, withdrawn</h3>
 <p>If you switch the access off in the iOS settings, Zebu shows only <strong>one</strong> button: &quot;Open iOS Settings&quot;. iOS does not ask a second time — a button that said &quot;allow&quot; anyway would do nothing at all, especially as it is the highlighted one.</p>
 <p>The same applies to the calendar: after a refusal only &quot;Open iOS Settings&quot; gets you any further, under Privacy &amp; Security › Zebu.</p>
@@ -845,14 +901,14 @@ Projektzeit 10:00 – 12:00                     12:00 – 17:00</code></pre>
 <p><strong>No automatic guessing.</strong> If an end time is missing, Zebu asks. It would rather invent no time than write a wrong time into your billing.</p>
 <p><strong>No silent deletion.</strong> Every deletion — entry, project, location, profile — asks first or needs a gesture. The only exception is the <strong>default profile</strong>, which cannot be deleted, because a fresh device would otherwise have nothing to export.</p>
 <p><strong>No retroactive renaming in the calendar.</strong> Renaming a project changes the locations that point at it — but no entries that already stand in the calendar. Zebu asks beforehand and leaves the calendar in your hands.</p>
-<p><strong>No import.</strong> Zebu can export, not read in. An exported CSV is meant for a table, not as a source for Zebu.</p>
+<p><strong>No fetching from the network.</strong> Zebu reads no data it fetches itself: no account, no address it queries, no background sync with a service of its own. Importing here means: a file that <strong>you</strong> choose or paste. The import was once intended as a URL and was deliberately moved to files on 14.10.2026 — a feature that does not work without a network does not belong in an app that is meant to work without one.</p>
 <p><strong>No retroactive change.</strong> A new time grid changes no times already recorded.</p>
 <hr />
 <h2 id="abschnitt-a-note-on-care-with-attendance">A note on care with attendance</h2>
 <p>Location tracking is location tracking — even if it is a very rough one. It answers the question of *when* you were at a place, not *what* you did there. If you move around inside a company, opposite your employer, it is good to know that this function is running before you switch it on. That is not a feature warning but a question of fairness.</p>
 <p>The code should be meaningful, because it ends up in calendar titles and exports: <code>HST3</code> says nothing, <code>KUND_NORD</code> does.</p>
 <hr />
-<p>*Zebu 1.0 — attendance and location tracking are available, and so is the export. An import (that is, reading a CSV back in) is not included.*</p>
+<p>*Zebu 0.2.0 — attendance and location tracking are available, and so is the export. Importing works from a file: locations, projects (also as CSV) and a timesheet. From the network Zebu fetches nothing.*</p>
       </div>
     </article>
     <article class="manual" id="manual-es" lang="es" data-language="es" hidden>
@@ -872,6 +928,8 @@ Projektzeit 10:00 – 12:00                     12:00 – 17:00</code></pre>
         <li class="stufe-3"><a href="#abschnitt-si-el-reloj-ya-estaba-corriendo">Si el reloj ya estaba corriendo</a></li>
         <li class="stufe-3"><a href="#abschnitt-registrar-tiempo-a-mano">Registrar tiempo a mano</a></li>
         <li class="stufe-2"><a href="#abschnitt-3-ver-y-cambiar-entradas">3. Ver y cambiar entradas</a></li>
+        <li class="stufe-3"><a href="#abschnitt-un-día-o-varios">Un día, o varios</a></li>
+        <li class="stufe-3"><a href="#abschnitt-cambiar-una-entrada">Cambiar una entrada</a></li>
         <li class="stufe-3"><a href="#abschnitt-el-calendario-es-la-verdad">El calendario es la verdad</a></li>
         <li class="stufe-2"><a href="#abschnitt-4-la-rejilla-de-tiempo">4. La rejilla de tiempo</a></li>
         <li class="stufe-2"><a href="#abschnitt-5-presencia">5. Presencia</a></li>
@@ -886,6 +944,8 @@ Projektzeit 10:00 – 12:00                     12:00 – 17:00</code></pre>
         <li class="stufe-2"><a href="#abschnitt-6-ajustes">6. Ajustes</a></li>
         <li class="stufe-3"><a href="#abschnitt-proyectos">Proyectos</a></li>
         <li class="stufe-3"><a href="#abschnitt-lugares">Lugares</a></li>
+        <li class="stufe-3"><a href="#abschnitt-derecho-de-pausas">Derecho de pausas</a></li>
+        <li class="stufe-3"><a href="#abschnitt-importar-un-archivo">Importar un archivo</a></li>
         <li class="stufe-3"><a href="#abschnitt-borrar-deslizando">Borrar deslizando</a></li>
         <li class="stufe-3"><a href="#abschnitt-el-acceso-a-la-ubicación-retirado">El acceso a la ubicación, retirado</a></li>
         <li class="stufe-2"><a href="#abschnitt-7-exportación">7. Exportación</a></li>
@@ -948,23 +1008,34 @@ Projektzeit 10:00 – 12:00                     12:00 – 17:00</code></pre>
     </ul>
 <p>En la pantalla de inicio <strong>no</strong> está en la lista de proyectos: un botón <strong>Iniciar</strong> en «Pause» sería un temporizador sin fin. Tampoco aparece al elegir el proyecto de un lugar de trabajo: la presencia es un lugar, no una pausa.</p>
 <h4 id="abschnitt-pausas-que-añade-zebu">Pausas que añade Zebu</h4>
-<p>Si un día <strong>terminado</strong> tiene más de <strong>6 horas</strong> de trabajo sin ninguna pausa, Zebu registra <strong>30 minutos</strong>. A partir de <strong>9 horas</strong> son <strong>45 minutos</strong>. Es la norma alemana de jornada laboral, y cuenta el <strong>tiempo de trabajo</strong>: las pausas no cuentan.</p>
-<p>Cuatro cosas que esta regla limita a propósito:</p>
+<p>Más de <strong>6 horas</strong> de trabajo en un día deben <strong>30 minutos</strong> de pausa, y a partir de <strong>9 horas</strong> son <strong>45</strong>. Es la norma alemana (§ 4 ArbZG), y cuenta el <strong>tiempo de trabajo</strong>: las pausas no cuentan. Los huecos cortos entre dos tiempos cuentan como pausa si duran al menos <strong>15 minutos</strong>.</p>
+<p><strong>Hoy ves lo que falta; los días terminados los recupera Zebu.</strong></p>
 <ul>
-      <li><strong>Solo para días terminados.</strong> Del día de hoy te encargas tú, con la ficha.</li>
-      <li><strong>Solo en un hueco libre.</strong> Si en tu día no cabe una pausa en ningún sitio, queda <strong>detrás del trabajo</strong> en vez de encima de una entrada. Los solapamientos quedan descartados bajo cualquier circunstancia, y una función automática es justo lo que los rompería a escondidas.</li>
+      <li>Si a un día le falta todavía una pausa, la página <strong>Registros</strong> lo dice encima de la lista: «Faltan 45 min de descanso». <strong>Tocar ahí la registra.</strong> Tú no eliges dónde queda: Zebu toma el tiempo libre más cercano a partir de la <strong>Hora del descanso</strong> de los ajustes.</li>
+      <li>En un día <strong>terminado</strong> la añade Zebu mismo al siguiente arranque y te lo dice. Del día de hoy te encargas tú: con la ficha bajo la lista de proyectos o tocando la fila.</li>
+      <li><strong>Solo en un hueco libre.</strong> Una pausa entra exclusivamente en la presencia que ningún temporizador ni otra pausa reclama ya. Si no cabe en ningún sitio, <strong>Zebu no la registra</strong>: si no, tendría que caer en un tiempo en marcha, y eso sería un descuento de tu tiempo. Ese día pone entonces «Atención: no se pueden insertar 45 min de descanso.». Esa línea no se puede tocar; no hay nada que tocar. En la exportación, un día así se lleva como línea <code>WARNING</code>.</li>
       <li><strong>Una vez por arranque</strong>, no en cada recarga.</li>
-      <li><strong>Zebu lo dice.</strong> Al abrirlo de nuevo verás un apunte: qué día, cuánto tiempo.</li>
     </ul>
-<blockquote><p>Un día existente no se puede dividir después en una pausa. Una pausa añadida automáticamente es una entrada <strong>propia</strong>, no una resta de la que ya había.</p></blockquote>
+<blockquote><p>Una pausa añadida a posteriori es una entrada <strong>propia</strong>, no una resta de la que ya había. Un día ya registrado no se puede descomponer después en una pausa.</p></blockquote>
+<p>En el <strong>extranjero</strong> desactivas toda la regla en los ajustes con <strong>«Cumplir el derecho alemán de pausas»</strong>. Entonces Zebu solo registra lo que le digas.</p>
 <h3 id="abschnitt-si-el-reloj-ya-estaba-corriendo">Si el reloj ya estaba corriendo</h3>
 <p>Si cerraste Zebu mientras el reloj corría, o reiniciaste el dispositivo, Zebu avisa arriba al arrancar. El tiempo siguió corriendo todo ese rato: puedes detenerlo o descartarlo.</p>
 <h3 id="abschnitt-registrar-tiempo-a-mano">Registrar tiempo a mano</h3>
 <p><strong>Registros</strong> → <strong>Registrar tiempo</strong>. Introduce inicio y fin, elige proyecto y actividad, guarda. Zebu redondea ambas horas a la rejilla (ver abajo).</p>
 <hr />
 <h2 id="abschnitt-3-ver-y-cambiar-entradas">3. Ver y cambiar entradas</h2>
-<p>La página <strong>Registros</strong> muestra tus tiempos agrupados por día, con el total del día. Toca una entrada para cambiarla.</p>
-<p>Ahí puedes corregir también la <strong>actividad</strong>, el <strong>proyecto</strong> y las dos horas. Borrar siempre pregunta antes.</p>
+<p>La página <strong>Registros</strong> abre en <strong>hoy</strong>, siempre, aunque hoy esté todavía vacío. No salta por su cuenta al último día con registros. Un día vacío dice él mismo que ahí <strong>no hay tiempo completado</strong>; la diferencia entre «nada registrado» y «está corriendo» es justo la que buscas.</p>
+<h3 id="abschnitt-un-día-o-varios">Un día, o varios</h3>
+<p>Arriba cambias:</p>
+<div class="tablewrap"><table><thead><tr><th>Vista</th><th>Qué se ve</th></tr></thead><tbody><tr><td><strong>Un día</strong></td><td>El día elegido, con su total bajo la fecha.</td></tr><tr><td><strong>Varios</strong></td><td>Ese mismo día y todo lo anterior, uno debajo de otro.</td></tr></tbody></table></div>
+<p>El día elegido sigue siendo el mismo al cambiar. «Varios» es una vista más larga desde aquí, no una segunda pantalla con su propia idea de dónde estás.</p>
+<p>Las <strong>flechas</strong> no saltan al día siguiente del calendario, sino al día siguiente <strong>en el que hay algo</strong>. La flecha hacia adelante ofrece siempre <strong>hoy</strong>, aunque hoy esté vacío: si no, estarías en ayer y el botón afirmaría que no hay mañana. El botón <strong>Hoy</strong> te devuelve desde cualquier día, y tocar la <strong>fecha</strong> abre el selector; se puede elegir todo hasta hoy.</p>
+<p>Zebu carga los últimos <strong>30 días</strong>. Un día más atrás está vacío en la lista, aunque haya algo en el calendario: ver el capítulo 7 sobre la exportación, que lee cualquier periodo.</p>
+<p>Encima de la lista pone lo que el día debe de pausa (capítulo 2).</p>
+<p>Un tiempo todavía <strong>en curso</strong> lleva <strong>EN CURSO</strong> en su fila y aquí no se puede editar. No es un descuido: un tiempo en curso no es algo que se cambia, sino algo que está pasando; se termina en el temporizador. Lo mismo vale para una visita en marcha: está ahí como fila, pero se escribe solo cuando te vas.</p>
+<h3 id="abschnitt-cambiar-una-entrada">Cambiar una entrada</h3>
+<p>Toca una entrada. Puedes corregir la <strong>actividad</strong>, el <strong>proyecto</strong> y las dos horas.</p>
+<p>Borrar es un botón rojo a todo lo ancho al final del formulario, y debajo un panel que te pregunta: un borrado sin pregunta no existe.</p>
 <p>Una entrada de presencia (ver abajo) lleva además un campo <strong>Ubicación</strong> con el código del lugar. Solo se puede leer: el código está ligado a tu lista de lugares. La actividad también la puedes escribir ahí libremente.</p>
 <h3 id="abschnitt-el-calendario-es-la-verdad">El calendario es la verdad</h3>
 <p>Zebu lee los mismos eventos que están en la app Calendario. Eso significa:</p>
@@ -1040,22 +1111,35 @@ Projektzeit 10:00 – 12:00                     12:00 – 17:00</code></pre>
 <blockquote><p><strong>Importante:</strong> si cierras Zebu desde el selector de apps (deslizando hacia arriba), iOS deja de detectar llegadas hasta que vuelvas a abrir la app. Es el comportamiento de iOS y no se puede esquivar. Irte normalmente con la app en segundo plano no se ve afectado.</p></blockquote>
 <hr />
 <h2 id="abschnitt-6-ajustes">6. Ajustes</h2>
-<div class="tablewrap"><table><thead><tr><th>Apartado</th><th>Qué</th></tr></thead><tbody><tr><td><strong>Idioma</strong></td><td>Deutsch, English, Español.</td></tr><tr><td><strong>Nombre del calendario</strong></td><td>Renombrarlo. Tiene efecto inmediato en la app Calendario.</td></tr><tr><td><strong>Proyectos</strong></td><td>La lista de proyectos. Se usa como paréntesis en el título.</td></tr><tr><td><strong>Rejilla de tiempo</strong></td><td>1 / 5 / 15 minutos. Vale para las entradas nuevas.</td></tr><tr><td><strong>Lugares</strong></td><td>Lugares de trabajo, acceso a la ubicación, un proyecto por lugar.</td></tr><tr><td><strong>Perfiles de exportación</strong></td><td>Columnas, orden y formato de las exportaciones.</td></tr></tbody></table></div>
+<div class="tablewrap"><table><thead><tr><th>Apartado</th><th>Qué</th></tr></thead><tbody><tr><td><strong>Idioma</strong></td><td>Deutsch, English, Español.</td></tr><tr><td><strong>Apariencia</strong></td><td>Sistema, Claro, Oscuro. «Sistema» sigue al dispositivo.</td></tr><tr><td><strong>Nombre del calendario</strong></td><td>Renombrarlo. Tiene efecto inmediato en la app Calendario.</td></tr><tr><td><strong>Proyectos</strong></td><td>La lista de proyectos. Se usa como paréntesis en el título.</td></tr><tr><td><strong>Rejilla de tiempo</strong></td><td>1 / 5 / 15 minutos. Vale para las entradas nuevas.</td></tr><tr><td><strong>Derecho de pausas</strong></td><td>Activar o desactivar la norma alemana de pausas, y dónde debe quedar una pausa.</td></tr><tr><td><strong>Lugares</strong></td><td>Lugares de trabajo, acceso a la ubicación, un proyecto por lugar.</td></tr><tr><td><strong>Importar un archivo</strong></td><td>Lugares, proyectos o un registro de horas desde un archivo.</td></tr><tr><td><strong>Perfiles de exportación</strong></td><td>Columnas, orden y formato de las exportaciones.</td></tr></tbody></table></div>
 <h3 id="abschnitt-proyectos">Proyectos</h3>
 <p>Un proyecto es una <strong>abreviatura</strong> (p. ej. <code>KUNDE_A</code>), una descripción y dos números opcionales para la exportación:</p>
 <div class="tablewrap"><table><thead><tr><th>Campo</th><th>Para</th></tr></thead><tbody><tr><td><strong>Abreviatura</strong></td><td>El paréntesis del título. El único campo obligatorio.</td></tr><tr><td><strong>Descripción</strong></td><td>Aparece en la ficha de la pantalla de inicio. Nunca se escribe en el calendario.</td></tr><tr><td><strong>ID</strong></td><td>Identificador opcional para la exportación, hasta 10 caracteres.</td></tr><tr><td><strong>Sub-ID</strong></td><td>Segundo identificador opcional, hasta 10 caracteres.</td></tr><tr><td><strong>Corazón</strong></td><td>Fija el proyecto arriba en la pantalla de inicio.</td></tr></tbody></table></div>
 <p>Tocar abre el formulario con todos los campos. «Nuevo proyecto» usa el mismo formulario.</p>
-<p>Dos cosas que conviene saber:</p>
+<p>Tres cosas que conviene saber:</p>
 <ul>
       <li><strong>Renombrar arrastra los lugares.</strong> Un lugar que apunta a <code>ALT</code> apunta al nombre nuevo tras el cambio. <strong>El calendario no se reescribe</strong>: las entradas ya registradas conservan su abreviatura antigua. Puedes cambiarlas en la app Calendario de Apple. Zebu pregunta antes, porque tiene consecuencias reales.</li>
-      <li><strong>Un proyecto en uso no se puede eliminar.</strong> Si no, la presencia de ese lugar se imputaría a una abreviatura que ya no existe. Zebu dice qué lugares son.</li>
+      <li><strong>El borrado está en el formulario.</strong> Ahí abajo hay un botón rojo <strong>Eliminar</strong> a todo lo ancho, y debajo pregunta Zebu. Eliminar un proyecto no quita <strong>ningún</strong> tiempo: las entradas ya registradas conservan su abreviatura, después simplemente ya no hay ningún proyecto con ese nombre. Por eso también aparece en el panel que te pregunta.</li>
+      <li><strong>Un proyecto en uso no se puede eliminar.</strong> Si no, la presencia de ese lugar se imputaría a una abreviatura que ya no existe. Zebu dice qué lugares son. Y <strong>«Pause» no se puede eliminar nunca</strong>: es de Zebu, y Zebu necesita el nombre para reconocer una pausa como pausa.</li>
     </ul>
 <p>La <strong>pantalla de inicio</strong> pone los favoritos primero y luego ordena alfabéticamente. La lista de los ajustes se queda <strong>siempre alfabética</strong>: un corazón no mueve nada allí, porque si no la fila se escaparía justo bajo el dedo que la acaba de tocar.</p>
 <h3 id="abschnitt-lugares">Lugares</h3>
 <p>Cada lugar necesita un <strong>proyecto</strong>; es obligatorio, porque el tiempo en ese lugar se imputa allí. Dos lugares son dos trabajos distintos, y un ajuste global solo podría ser válido para uno de los dos.</p>
 <p>Tras una actualización, Zebu muestra una vez en un lugar existente <code>&quot;default&quot; gibt es nicht mehr</code> y te pide que elijas un proyecto. Es lo correcto y no es un error: el ajuste anterior era texto libre y no tenía por qué estar en tu lista de proyectos.</p>
+<h3 id="abschnitt-derecho-de-pausas">Derecho de pausas</h3>
+<p>Arriba del todo el interruptor <strong>«Cumplir el derecho alemán de pausas»</strong>. Desactivado significa: Zebu solo registra lo que le digas, para el tiempo en el extranjero. Debajo, la <strong>Hora del descanso</strong>: la hora a partir de la cual debe quedar una pausa automática, lo más cerca posible de esa hora según lo permita el día.</p>
+<p>La regla en sí está en el capítulo 2.</p>
+<h3 id="abschnitt-importar-un-archivo">Importar un archivo</h3>
+<p>Zebu lee tres clases de archivo: <strong>lugares</strong>, <strong>proyectos</strong> y un <strong>registro de horas</strong>. Los eliges con el selector de archivos del sistema o pegas su contenido.</p>
+<p><strong>Zebu enseña primero qué cambiaría</strong> — qué sería nuevo, qué se sustituiría, qué se queda igual — y escribe solo cuando tocas <strong>Aplicar</strong>. Cada línea que no puede leer se <strong>omite y se nombra</strong>; ocho lugares buenos no se pierden por un noveno sin coordenadas.</p>
+<p>Qué es cada clase:</p>
+<div class="tablewrap"><table><thead><tr><th>Archivo</th><th>Qué pasa</th></tr></thead><tbody><tr><td><strong>Lugares</strong></td><td>Un lugar sin proyecto y <strong>sin registro</strong> entra; un lugar que ya existe conserva su proyecto y su activado/desactivado.</td></tr><tr><td><strong>Proyectos</strong></td><td>La descripción, el ID y el Sub-ID se sustituyen, el <strong>corazón</strong> se queda como lo pusiste.</td></tr><tr><td><strong>Registro de horas</strong></td><td>Una lista de tiempos se crea como <strong>eventos reales del calendario</strong>: exactamente los tiempos del archivo, sin rejilla.</td></tr></tbody></table></div>
+<p>Los lugares y los registros de horas son <strong>JSON</strong>. Una lista de proyectos también puede ser <strong>CSV</strong>, la forma que hace una hoja de cálculo: su primera línea empieza por <code>PROJECT</code>, y después pueden seguir <code>DESCRIPTION</code>, <code>ID</code> y <code>SUBID</code>, cada uno de ellos opcional. Se separa con coma o punto y coma; una columna que Zebu no conoce se <strong>nombra una vez y se omite</strong>, el archivo carga igual.</p>
+<p><strong>De la red no llega nada.</strong> La importación va exclusivamente por un archivo que eliges o pegas tú mismo: ver el capítulo 9.</p>
+<p>Hay ejemplos en el repositorio, en <code>docs/</code>: <code>import-locations.example.json</code>, <code>import-projects.example.json</code>, <code>import-projects.demo.csv</code> y <code>import-entries.example.json</code>.</p>
 <h3 id="abschnitt-borrar-deslizando">Borrar deslizando</h3>
 <p>En la lista de proyectos y en la de lugares, <strong>desliza a la izquierda</strong>. Aparece un cubo de basura rojo. Borrar pregunta después: en el caso de un lugar, con el aviso de que la presencia ya registrada se conserva.</p>
+<p>La fila <strong>«Pause»</strong> no se puede deslizar siquiera: no muestra ningún cubo de basura. Una acción que siempre se rechaza sería un botón que no hace nada, y eso es peor que ningún botón. En la lista de proyectos también vale sin gesto: el formulario tiene abajo el mismo botón rojo <strong>Eliminar</strong>.</p>
 <h3 id="abschnitt-el-acceso-a-la-ubicación-retirado">El acceso a la ubicación, retirado</h3>
 <p>Si quitas el acceso en los ajustes de iOS, Zebu solo muestra <strong>un</strong> botón: «Abrir ajustes de iOS». iOS no pregunta por segunda vez: un botón que dijera «permitir» no haría nada, y menos si es el destacado.</p>
 <p>Lo mismo vale para el calendario: tras una denegación, solo «Abrir ajustes de iOS» lleva más allá, en Privacidad y seguridad › Zebu.</p>
@@ -1147,14 +1231,14 @@ Projektzeit 10:00 – 12:00                     12:00 – 17:00</code></pre>
 <p><strong>Sin adivinar automáticamente.</strong> Si falta una hora de fin, Zebu pregunta. Prefiere no inventar una hora antes que escribirte una hora falsa en la nómina.</p>
 <p><strong>Sin borrados silenciosos.</strong> Cada borrado — entrada, proyecto, lugar, perfil — pregunta o exige un gesto. La única excepción es el <strong>perfil predeterminado</strong>, que no se puede eliminar porque un dispositivo nuevo no tendría nada que exportar.</p>
 <p><strong>Sin renombrado retroactivo en el calendario.</strong> Renombrar un proyecto cambia los lugares que lo apuntan, pero no las entradas que ya están en el calendario. Zebu pregunta antes y deja el calendario en tus manos.</p>
-<p><strong>Sin importación.</strong> Zebu puede exportar, no leer. Una CSV exportada es para una hoja de cálculo, no una fuente para Zebu.</p>
+<p><strong>Sin descarga de la red.</strong> Zebu no lee datos que se procure él mismo: ni cuenta, ni dirección que consulte, ni sincronización en segundo plano con un servicio propio. Importar aquí significa: un archivo que eliges o pegas <strong>tú</strong>. La importación se pensó una vez como URL y el 14.10.2026 se pasó a propósito a archivos: una función que no funciona sin red no pertenece a una app pensada para funcionar sin red.</p>
 <p><strong>Sin cambios retroactivos.</strong> Una rejilla de tiempo nueva no modifica los tiempos ya registrados.</p>
 <hr />
 <h2 id="abschnitt-un-aviso-sobre-el-cuidado-con-la-presencia">Un aviso sobre el cuidado con la presencia</h2>
 <p>El registro de lugares es seguimiento de ubicación, aunque muy tosco. Responde a la pregunta de *cuándo* estuviste en un lugar, no a la de *qué* hiciste allí. Si te mueves en una empresa, frente a tu empleador o tu empleadora, conviene saber que esta función está activa antes de encenderla. No es un aviso sobre la función, es una cuestión de justicia.</p>
 <p>El código debería ser significativo, porque acaba en títulos de calendario y en exportaciones: <code>HST3</code> no dice nada, <code>KUND_NORD</code> sí.</p>
 <hr />
-<p>*Zebu 1.0 — La presencia y la ubicación están disponibles, y la exportación también. Una importación (es decir, volver a leer una CSV) no está incluida.*</p>
+<p>*Zebu 0.2.0 — La presencia y la ubicación están disponibles, y la exportación también. Importar funciona desde un archivo: lugares, proyectos (también como CSV) y un registro de horas. De la red Zebu no trae nada.*</p>
       </div>
     </article>
     </main>
