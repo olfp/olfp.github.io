@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Zebu — Datenschutz / Privacy</title>
+    <meta name="description" content="Zebu speichert alles auf dem Gerät: kein Server, kein Konto, keine Analyse." />
+    <style>
+      /* The manual's palette, repeated for the reason written there: a Pages
+         stylesheet cannot reach into the app's sources. */
+      :root {
+        color-scheme: light dark;
+        --bg: #f2ede4;
+        --label: #2b2419;
+        --secondary: #6b5f4d;
+        --tint: #7a6142;
+        --separator: rgb(43 36 25 / 0.18);
+      }
+
+      @media (prefers-color-scheme: dark) {
+        :root {
+          --bg: #1c1814;
+          --label: #f2ede4;
+          --secondary: #a89b86;
+          --tint: #d3b98d;
+          --separator: rgb(242 237 228 / 0.18);
+        }
+      }
+
+      * { box-sizing: border-box; }
+
+      body {
+        margin: 0;
+        padding: 0 1rem 4rem;
+        background: var(--bg);
+        color: var(--label);
+        font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", system-ui, sans-serif;
+        line-height: 1.5;
+      }
+
+      main { max-width: 44rem; margin: 0 auto; }
+
+      nav {
+        display: flex;
+        gap: 0.5rem;
+        padding: 1rem 0;
+        border-bottom: 0.5px solid var(--separator);
+        font-size: 0.875rem;
+      }
+
+      a { color: var(--tint); }
+
+      h1 { font-size: 2rem; margin: 2rem 0 0.5rem; }
+      h2 {
+        font-size: 0.8125rem;
+        font-weight: 600;
+        letter-spacing: 0.04em;
+        text-transform: uppercase;
+        color: var(--tint);
+        margin: 2rem 0 0.5rem;
+      }
+
+      p, li { font-size: 1rem; }
+      p { margin: 0 0 1rem; }
+      ul { margin: 0 0 1rem; padding-left: 1.25rem; }
+      li + li { margin-top: 0.5rem; }
+      strong { font-weight: 600; }
+      code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 0.875em; }
+
+      /* The second language, set apart so it is not read as a continuation. */
+      .privacy + .privacy { margin-top: 3rem; padding-top: 1rem; border-top: 0.5px solid var(--separator); }
+
+      footer {
+        margin-top: 3rem;
+        padding-top: 1rem;
+        border-top: 0.5px solid var(--separator);
+        color: var(--secondary);
+        font-size: 0.8125rem;
+      }
+      footer p { margin: 0; font-size: 0.8125rem; }
+
+      @media print { nav { display: none; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <nav><a href="#privacy-de">Deutsch</a> · <a href="#privacy-en">English</a> · <a href="./">Handbuch</a></nav>
+    <article class="privacy" id="privacy-de" lang="de">
+      <h1>Datenschutz</h1>
+      <div class="body">
+<p>Stand: 17. November 2026</p>
+<p>Zebu ist eine Zeiterfassung für das iPhone. Was du einträgst, bleibt auf deinem Gerät: Zebu hat keinen Server, kein Konto und keine Analyse.</p>
+<h2 id="abschnitt-welche-daten-zebu-verarbeitet">Welche Daten Zebu verarbeitet</h2>
+<ul>
+      <li><strong>Zeiten und Tätigkeiten</strong> liegen als Termine in einem eigenen Kalender, den Zebu in deinem iOS-Kalender anlegt. Der Kalender gehört dir; du kannst ihn in der Kalender-App von Apple lesen, ändern und löschen.</li>
+      <li><strong>Einstellungen</strong> — Projekte, Arbeitsorte, Zeitraster, Sprache — speichert Zebu in den Einstellungen der App auf dem Gerät, ebenso kleine Arbeitsvermerke wie „zur Bearbeitung markiert&quot;.</li>
+      <li><strong>Dein Standort</strong> wird gelesen, um zu erkennen, ob du einen von dir eingerichteten Arbeitsort erreichst oder verlässt — auch im Hintergrund, damit die Anwesenheit ohne geöffnete App erfasst wird. Der Vergleich mit deinen Orten findet auf dem Gerät statt; der Standort wird <strong>nicht übertragen</strong> und nicht gespeichert, nur die daraus entstandene Anwesenheit.</li>
+    </ul>
+<h2 id="abschnitt-was-zebu-nicht-tut">Was Zebu nicht tut</h2>
+<ul>
+      <li><strong>Keine Übertragung.</strong> Zebu hat keine Verbindung zu einem Server; es werden keine Daten an uns oder an Dritte gesendet.</li>
+      <li><strong>Kein Konto.</strong> Du meldest dich nirgends an.</li>
+      <li><strong>Keine Analyse, keine Werbung, kein Tracking, keine Weitergabe.</strong></li>
+      <li><strong>Kein Zugriff</strong> auf Kontakte, Fotos, Mikrofon, Kamera oder Gesundheitsdaten.</li>
+    </ul>
+<h2 id="abschnitt-was-du-selbst-weitergibst">Was du selbst weitergibst</h2>
+<p>Ein <strong>Export</strong> ist eine Datei, die du erzeugst und über das Teilen-Menü von iOS selbst weitergibst. Wohin, entscheidest du; Zebu überträgt nichts von sich aus.</p>
+<h2 id="abschnitt-löschen">Löschen</h2>
+<p>Löschst du einen Eintrag, wird der Termin aus deinem Kalender entfernt. Löschst du den Zebu-Kalender, sind die Zeiten weg. Die Einstellungen verschwinden mit der App: Zebu vom Gerät löschen entfernt sie.</p>
+<h2 id="abschnitt-testflight">TestFlight</h2>
+<p>Diese Fassung wird über Apples TestFlight verteilt. Installation, Abstürze und Rückmeldungen laufen dabei über Apple; dafür gilt Apples Datenschutzerklärung. Zebu selbst sendet auch dort nichts.</p>
+<h2 id="abschnitt-kontakt">Kontakt</h2>
+<p>Olaf Püschel, olf@computer-zoo.de</p>
+      </div>
+    </article>
+    <article class="privacy" id="privacy-en" lang="en">
+      <h1>Privacy</h1>
+      <div class="body">
+<p>Last updated: 17 November 2026</p>
+<p>Zebu is a time tracker for the iPhone. What you enter stays on your device: no server, no account, no analytics.</p>
+<h2 id="abschnitt-what-zebu-processes">What Zebu processes</h2>
+<ul>
+      <li><strong>Times and activities</strong> are events in a calendar of its own, which Zebu creates in your iOS calendar. The calendar is yours; you can read, change and delete it in Apple&#39;s Calendar app.</li>
+      <li><strong>Settings</strong> — projects, work locations, time grid, language — live in the app&#39;s preferences on the device, along with small working notes such as &quot;marked for editing&quot;.</li>
+      <li><strong>Your location</strong> is read to notice whether you arrive at or leave a work location *you* set up — in the background too, so attendance is recorded while the app is closed. The comparison with your locations happens on the device; the location is <strong>never transmitted</strong> and not stored, only the attendance that followed from it.</li>
+    </ul>
+<h2 id="abschnitt-what-zebu-does-not-do">What Zebu does not do</h2>
+<ul>
+      <li><strong>Nothing leaves the phone.</strong> Zebu has no connection to a server; no data is sent to us or to anyone else.</li>
+      <li><strong>No account.</strong> There is nothing to sign in to.</li>
+      <li><strong>No analytics, no advertising, no tracking, no sharing.</strong></li>
+      <li><strong>No access</strong> to contacts, photos, microphone, camera or health data.</li>
+    </ul>
+<h2 id="abschnitt-what-you-pass-on-yourself">What you pass on yourself</h2>
+<p>An <strong>export</strong> is a file <strong>you</strong> create and hand on through iOS&#39;s share sheet. Where it goes is your decision; Zebu transmits nothing on its own.</p>
+<h2 id="abschnitt-deleting">Deleting</h2>
+<p>Deleting an entry removes the event from your calendar. Deleting the Zebu calendar removes the times. Settings go with the app: removing Zebu from the device removes them.</p>
+<h2 id="abschnitt-testflight">TestFlight</h2>
+<p>This build is distributed through Apple&#39;s TestFlight. Installation, crashes and feedback go through Apple, under Apple&#39;s privacy policy. Zebu itself sends nothing there either.</p>
+<h2 id="abschnitt-contact">Contact</h2>
+<p>Olaf Püschel, olf@computer-zoo.de</p>
+      </div>
+    </article>
+      <footer>
+        <p>Quelle: <code>docs/privacy/{de,en}.md</code>, erzeugt von <code>npm run manual</code>.</p>
+      </footer>
+    </main>
+  </body>
+</html>
